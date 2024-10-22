@@ -2,15 +2,22 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const porscheBold = localFont({
+  src: "./fonts/911porschav3bold.ttf",
+  variable: "--font-porsche-bold",
+  weight: "700", // Adjust weight if necessary
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const calcioDemo = localFont({
+  src: "./fonts/calcio-demo-400.ttf",
+  variable: "--font-calcio-demo",
+  weight: "400", // Adjust weight if necessary
+});
+
+const urbanShockBold = localFont({
+  src: "./fonts/UrbanShock-Bold.otf",
+  variable: "--font-urbanshock-bold",
+  weight: "700", // Adjust weight if necessary
 });
 
 export const metadata: Metadata = {
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${porscheBold.variable} ${calcioDemo.variable} ${urbanShockBold.variable} antialiased`}
       >
         {children}
       </body>

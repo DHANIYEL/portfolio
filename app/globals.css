@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.porsche {
+  font-family: var(--font-porsche-bold);
+  font-size: 20px;
+  font-weight: 700;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.calcio {
+  font-family: var(--font-calcio-demo);
+  font-size: 20px;
+  font-weight: 400;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.urbanshock {
+  font-family: var(--font-urbanshock-bold);
+  font-size: 20px;
+  font-weight: 700;
 }
+
+
