@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // For Next.js 13 and later
 import useMousePosition from "../utils/useMousePosition";
 import { motion } from "framer-motion";
 import { GlowButton } from "../components/Button";
 import { FaAngleDoubleDown } from "react-icons/fa";
+import { gsap } from "gsap";
 
 const HomePage = () => {
   const router = useRouter(); // Initialize the router
@@ -28,6 +29,44 @@ const HomePage = () => {
     router.push("/about"); // Navigate to the About page
   };
 
+  // Function to split text into characters wrapped in spans
+  const splitText = (text: string) => {
+    return text.split("").map((char, index) => (
+      <span key={index} className="char">
+        {char}
+      </span>
+    ));
+  };
+
+  // GSAP Animations
+  useEffect(() => {
+    // Animate characters on mount
+    gsap.from(".char", {
+      yPercent: 130,
+      opacity: 0,
+      stagger: 0.05,
+      duration: 1,
+      ease: "bounce.in",
+    });
+
+    // Fade in Resume button
+    gsap.from(".resume-btn", {
+      opacity: 0,
+      duration: 1,
+      delay: 1, // Start after the text animation
+      ease: "power2.out",
+    });
+
+    // Arrow comes from bottom
+    gsap.from(".arrow-icon", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      delay: 1.5, // Start after the button animation
+      ease: "back.out(1.7)",
+    });
+  }, []);
+
   return (
     <div className="relative w-screen h-screen">
       <div className="text-[256px] urbanshock text-[#EEE9C7] main">
@@ -42,15 +81,13 @@ const HomePage = () => {
           <h1
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="w-full"
+            className="w-full split"
           >
-            DHANIYEL {window.innerWidth < 768 && <br />} DARVESH
+            {splitText("DHANIYEL DARVESH")}
           </h1>
         </motion.div>
         <div className="body">
-          <h1 className="text-center">
-            DHANIYEL {window.innerWidth < 768 && <br />} DARVESH
-          </h1>
+          <h1 className="text-center split">{splitText("DHANIYEL DARVESH")}</h1>
         </div>
         <div
           style={{
@@ -61,12 +98,19 @@ const HomePage = () => {
             height: "100vh",
           }}
         >
-          <GlowButton color={"#ffffff"} onClick={handleDownload}>
+          {/* GlowButton with GSAP fade-in effect */}
+          <GlowButton
+            className="resume-btn"
+            color={"#ffffff"}
+            onClick={handleDownload}
+          >
             RESUME
           </GlowButton>
+
+          {/* Down arrow with GSAP upward animation */}
           <div className="absolute bottom-5">
             <motion.div
-              className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+              className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
               whileHover={{
                 scale: 1.2, // Slight scaling effect on hover
                 rotate: 360, // Rotate the icon on hover
