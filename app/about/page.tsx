@@ -12,9 +12,9 @@ const About = () => {
 
   return (
     <div className="relative w-screen">
-      <div className="text-9xl urbanshock text-[#EEE9C7] about_main">
+      <div className="text-9xl urbanshock text-[#EEE9C7] about_main ">
         <motion.div
-          className="about_mask"
+          className="about_mask flex justify-start gap-10 items-center flex-col "
           animate={{
             WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`, // Center the mask at mouse position
             WebkitMaskSize: `${size}px`,
@@ -28,21 +28,41 @@ const About = () => {
           >
             ABOUT
           </h1>
+          <motion.div
+            className=""
+            animate={{
+              WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`, // Center the mask at mouse position
+              WebkitMaskSize: `${size}px`,
+            }}
+            transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
+          >
+            <p
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="font-light font-sans text-4xl leading-relaxed  max-w-screen-xl  text-black text-center px-5"
+            >
+              With one year of hands-on experience, I specialize in crafting
+              user-friendly, responsive web applications. I’m highly proficient
+              in HTML, CSS, and JavaScript, with a deep understanding of
+              front-end development principles. I am passionate about designing
+              visually appealing and interactive user experiences that stand
+              out.
+            </p>
+          </motion.div>
         </motion.div>
-        <div className="about_body">
+        <div className="about_body flex justify-start gap-10 items-center flex-col ">
           <h1 className="text-center">ABOUT</h1>
+          <div>
+            <p className="font-light font-sans text-4xl leading-relaxed  max-w-screen-xl  px-5 text-center">
+              With one year of hands-on experience, I specialize in crafting
+              user-friendly, responsive web applications. I’m highly proficient
+              in HTML, CSS, and JavaScript, with a deep understanding of
+              front-end development principles. I am passionate about designing
+              visually appealing and interactive user experiences that stand
+              out.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="p-10">
-        {" "}
-        {/* Padding for the paragraph */}
-        <p className="text-lg text-center text-[#EEE9C7]">
-          {" "}
-          {/* Added text styling */}I am a software engineer with a passion for
-          creating user-friendly and accessible digital experiences. I have
-          worked on various projects, from small startups to large corporations,
-          and I am always looking for new opportunities to learn and grow.
-        </p>
       </div>
     </div>
   );
