@@ -4,19 +4,16 @@
 
 .porsche {
   font-family: var(--font-porsche-bold);
-  font-size: 20px;
   font-weight: 700;
 }
 
 .calcio {
   font-family: var(--font-calcio-demo);
-  font-size: 20px;
   font-weight: 400;
 }
 
 .urbanshock {
   font-family: var(--font-urbanshock-bold);
-  font-size: 20px;
   font-weight: 700;
 }
 
