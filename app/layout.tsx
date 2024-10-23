@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import BackgroundLayout from "./backgroundLayout"; // Import your BackgroundLayout component
 
 const porscheBold = localFont({
   src: "./fonts/911porschav3bold.ttf",
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${porscheBold.variable} ${calcioDemo.variable} ${urbanShockBold.variable} antialiased`}
       >
-        {children}
+        <BackgroundLayout>{children}</BackgroundLayout>
       </body>
     </html>
   );
