@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // For Next.js 13 and later
 import useMousePosition from "../utils/useMousePosition";
 import { motion } from "framer-motion";
@@ -27,40 +27,41 @@ const HomePage = () => {
   // Function to split text into characters wrapped in spans
   const splitText = (text: string) => {
     return text.split("").map((char, index) => (
-      <span key={index} className="char">
+      <motion.span
+        key={index}
+        initial={{ y: "130%", opacity: 0 }}
+        animate={{ y: "0%", opacity: 1 }}
+        transition={{
+          delay: index * 0.05,
+          type: "spring",
+          bounce: 0.5,
+          duration: 1,
+        }}
+        className="char"
+      >
         {char}
-      </span>
+      </motion.span>
     ));
   };
 
-  // GSAP Animations
-  useEffect(() => {
-    // Animate characters on mount
-    gsap.from(".char", {
-      yPercent: 130,
-      opacity: 0,
-      stagger: 0.05,
-      duration: 1,
-      ease: "bounce.in",
-    });
+  // Variants for Resume button fade-in
+  const fadeInVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { delay: 1, duration: 1, ease: "easeOut" },
+    },
+  };
 
-    // Fade in Resume button
-    gsap.from(".resume-btn", {
-      opacity: 0,
-      duration: 1,
-      delay: 1, // Start after the text animation
-      ease: "power2.out",
-    });
-
-    // Arrow comes from bottom
-    gsap.from(".arrow-icon", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      delay: 1.5, // Start after the button animation
-      ease: "back.out(1.7)",
-    });
-  }, []);
+  // Arrow from bottom animation
+  const arrowVariant = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { delay: 1.5, duration: 1, ease: "easeOut" },
+    },
+  };
 
   // Function to trigger smooth page animation and navigate to the About page
   const handleNavigate = () => {
@@ -107,17 +108,25 @@ const HomePage = () => {
             height: "100vh",
           }}
         >
-          {/* GlowButton with GSAP fade-in effect */}
-          <GlowButton
-            className="resume-btn"
-            color={"#ffffff"}
-            onClick={handleDownload}
+          {/* GlowButton with Framer Motion fade-in effect */}
+          <motion.div
+            variants={fadeInVariant}
+            initial="hidden"
+            animate="visible"
+            className="resume-btn z-50"
           >
-            RESUME
-          </GlowButton>
+            <GlowButton color={"#ffffff"} onClick={handleDownload}>
+              RESUME
+            </GlowButton>
+          </motion.div>
 
-          {/* Down arrow with GSAP upward animation */}
-          <div className="absolute bottom-5">
+          {/* Down arrow with Framer Motion animation */}
+          <motion.div
+            className="absolute bottom-5"
+            variants={arrowVariant}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.div
               className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
               whileHover={{
@@ -125,11 +134,11 @@ const HomePage = () => {
                 rotate: 360, // Rotate the icon on hover
                 transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
               }}
-              onClick={handleNavigate} // Trigger smooth animation and navigate when clicked
+              onClick={handleNavigate} // Trigger navigation when clicked
             >
               <FaAngleDoubleDown className="w-5 h-5 text-white" />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
@@ -137,3 +146,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
