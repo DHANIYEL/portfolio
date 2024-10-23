@@ -1,3 +1,4 @@
+import { color } from "framer-motion";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -11,6 +12,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        txt:"#EEE9C7",
+        greenl:"#57FF6B"
       },
     },
   },

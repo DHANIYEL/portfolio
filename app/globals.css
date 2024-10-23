@@ -6,6 +6,10 @@
   font-family: var(--font-porsche-bold);
   font-weight: 700;
 }
+.vonique {
+  font-family: var(--font-vonique-bold);
+  font-weight: 700;
+}
 
 .calcio {
   font-family: var(--font-calcio-demo);

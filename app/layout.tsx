@@ -8,6 +8,11 @@ const porscheBold = localFont({
   variable: "--font-porsche-bold",
   weight: "700", // Adjust weight if necessary
 });
+const Vonique = localFont({
+  src: "./fonts/Vonique 64 Bold.ttf",
+  variable: "--font-vonique-bold",
+  weight: "700", // Adjust weight if necessary
+});
 
 const calcioDemo = localFont({
   src: "./fonts/calcio-demo-400.ttf",
@@ -34,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${porscheBold.variable} ${calcioDemo.variable} ${urbanShockBold.variable} antialiased`}
+        className={`${porscheBold.variable} ${calcioDemo.variable} ${Vonique.variable} ${urbanShockBold.variable} antialiased`}
       >
         <BackgroundLayout>{children}</BackgroundLayout>
       </body>
