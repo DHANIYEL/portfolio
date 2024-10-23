@@ -26,7 +26,7 @@ const About = () => {
             onMouseLeave={() => setIsHovered(false)}
             className=""
           >
-            ABOUT
+            ABOUT ME
           </h1>
           <motion.div
             className=""
@@ -51,9 +51,9 @@ const About = () => {
           </motion.div>
         </motion.div>
         <div className="about_body flex justify-start gap-10 items-center flex-col ">
-          <h1 className="text-center">ABOUT</h1>
+          <h1 className="text-center">ABOUT ME</h1>
           <div>
-            <p className="font-light font-sans text-4xl leading-relaxed  max-w-screen-xl  px-5 text-center">
+            <p className="font-extralight font-sans text-4xl leading-relaxed  max-w-screen-xl  px-5 text-center">
               With one year of hands-on experience, I specialize in crafting
               user-friendly, responsive web applications. I’m highly proficient
               in HTML, CSS, and JavaScript, with a deep understanding of
