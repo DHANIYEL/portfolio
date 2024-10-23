@@ -24,11 +24,6 @@ const HomePage = () => {
     document.body.removeChild(link); // Clean up by removing the link after the click
   };
 
-  // Function to navigate to the About page
-  const handleNavigate = () => {
-    router.push("/about"); // Navigate to the About page
-  };
-
   // Function to split text into characters wrapped in spans
   const splitText = (text: string) => {
     return text.split("").map((char, index) => (
@@ -66,6 +61,20 @@ const HomePage = () => {
       ease: "back.out(1.7)",
     });
   }, []);
+
+  // Function to trigger smooth page animation and navigate to the About page
+  const handleNavigate = () => {
+    // Create a smooth page transition using GSAP
+    gsap.to(".main, .body", {
+      opacity: 0,
+      y: -50, // Slide the content up a bit
+      duration: 0.7,
+      ease: "power2.inOut",
+      onComplete: () => {
+        router.push("/about"); // Navigate to the About page after animation
+      },
+    });
+  };
 
   return (
     <div className="relative w-screen h-screen">
@@ -116,7 +125,7 @@ const HomePage = () => {
                 rotate: 360, // Rotate the icon on hover
                 transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
               }}
-              onClick={handleNavigate} // Navigate when clicked
+              onClick={handleNavigate} // Trigger smooth animation and navigate when clicked
             >
               <FaAngleDoubleDown className="w-5 h-5 text-white" />
             </motion.div>
