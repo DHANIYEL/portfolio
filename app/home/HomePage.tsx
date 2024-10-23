@@ -13,9 +13,19 @@ const HomePage = () => {
   // Determine if the screen size is less than the md breakpoint
   const isMobile = window.innerWidth < 768; // Example breakpoint, adjust as needed
 
+  // Function to handle the resume download
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/assets/DhaniyelDarveshResume.pdf"; // Path to your PDF file
+    link.download = "Dhaniyel_Darvesh_Resume.pdf"; // The file name you want to give the downloaded file
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link); // Clean up by removing the link after the click
+  };
+
   return (
     <div className="relative w-screen h-screen">
-      <div className="text-[256px]  urbanshock text-[#EEE9C7] main">
+      <div className="text-[256px] urbanshock text-[#EEE9C7] main">
         <motion.div
           className="mask"
           animate={{
@@ -44,10 +54,7 @@ const HomePage = () => {
             height: "100vh",
           }}
         >
-          <GlowButton
-            onClick={() => console.log("Button clicked")}
-            color={"#ffffff"}
-          >
+          <GlowButton color={"#ffffff"} onClick={handleDownload}>
             RESUME
           </GlowButton>
         </div>
