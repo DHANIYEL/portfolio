@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import useMousePosition from "../utils/useMousePosition";
 import { motion } from "framer-motion";
 import { GlowButton } from "../components/Button";
+import { FaAngleDoubleDown } from "react-icons/fa";
 
 const HomePage = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -57,6 +58,18 @@ const HomePage = () => {
           <GlowButton color={"#ffffff"} onClick={handleDownload}>
             RESUME
           </GlowButton>
+          <div className="absolute bottom-5">
+            <motion.div
+              className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center "
+              whileHover={{
+                scale: 1.2, // Slight scaling effect on hover
+                rotate: 360, // Rotate the icon on hover
+                transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
+              }}
+            >
+              <FaAngleDoubleDown className="w-5 h-5 text-white" />
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
