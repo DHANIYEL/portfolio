@@ -43,8 +43,8 @@
   mask-image: url('/cursor.svg'); /* Removed /public */
   mask-repeat: no-repeat;
   mask-size: 40px;
-  background: #EEE9C7;
+  background:#57FF6B;
   position: absolute;
-  color: #57FF6B;
+  color: #000;
 }
 
