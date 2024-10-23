@@ -10,6 +10,21 @@ const About = () => {
   const { x, y } = useMousePosition();
   const size = isHovered ? 200 : 40;
 
+  // Framer Motion variants for upward animation
+  const textVariant = {
+    hidden: { opacity: 0, y: -50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 10,
+        duration: 2,
+      },
+    },
+  };
+
   return (
     <div className="relative w-screen">
       <div className="text-9xl urbanshock text-[#EEE9C7] about_main ">
@@ -21,14 +36,23 @@ const About = () => {
           }}
           transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
         >
-          <h1
+          {/* Heading with upward animation */}
+          <motion.h1
+            variants={textVariant}
+            initial="hidden"
+            animate="visible"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className=""
           >
             ABOUT ME
-          </h1>
+          </motion.h1>
+
+          {/* Paragraph with upward animation */}
           <motion.div
+            variants={textVariant}
+            initial="hidden"
+            animate="visible"
             className=""
             animate={{
               WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`, // Center the mask at mouse position
@@ -36,11 +60,32 @@ const About = () => {
             }}
             transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
           >
-            <p
+            <motion.p
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="font-light font-sans text-4xl leading-relaxed  max-w-screen-xl  text-black text-center px-5"
+              className="font-light font-sans text-4xl leading-relaxed max-w-screen-xl text-black text-center px-5"
             >
+              With one year of hands-on experience, I specialize in crafting
+              user-friendly, responsive web applications. I’m highly proficient
+              in HTML, CSS, and JavaScript, with a deep understanding of
+              front-end development principles. I am passionate about designing
+              visually appealing and interactive user experiences that stand
+              out.
+            </motion.p>
+          </motion.div>
+        </motion.div>
+
+        <div className="about_body flex justify-start gap-10 items-center flex-col ">
+          <motion.h1
+            variants={textVariant}
+            initial="hidden"
+            animate="visible"
+            className="text-center"
+          >
+            ABOUT ME
+          </motion.h1>
+          <motion.div variants={textVariant} initial="hidden" animate="visible">
+            <p className="font-extralight font-sans text-4xl leading-relaxed max-w-screen-xl px-5 text-center">
               With one year of hands-on experience, I specialize in crafting
               user-friendly, responsive web applications. I’m highly proficient
               in HTML, CSS, and JavaScript, with a deep understanding of
@@ -49,19 +94,6 @@ const About = () => {
               out.
             </p>
           </motion.div>
-        </motion.div>
-        <div className="about_body flex justify-start gap-10 items-center flex-col ">
-          <h1 className="text-center">ABOUT ME</h1>
-          <div>
-            <p className="font-extralight font-sans text-4xl leading-relaxed  max-w-screen-xl  px-5 text-center">
-              With one year of hands-on experience, I specialize in crafting
-              user-friendly, responsive web applications. I’m highly proficient
-              in HTML, CSS, and JavaScript, with a deep understanding of
-              front-end development principles. I am passionate about designing
-              visually appealing and interactive user experiences that stand
-              out.
-            </p>
-          </div>
         </div>
       </div>
     </div>
