@@ -50,5 +50,6 @@
   background:#57FF6B;
   position: absolute;
   color: #000;
+  z-index: 10;
 }
 

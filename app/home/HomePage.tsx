@@ -122,7 +122,7 @@ const HomePage = () => {
 
           {/* Down arrow with Framer Motion animation */}
           <motion.div
-            className="absolute bottom-5"
+            className="absolute bottom-5 z-[999]"
             variants={arrowVariant}
             initial="hidden"
             animate="visible"
@@ -136,7 +136,7 @@ const HomePage = () => {
               }}
               onClick={handleNavigate} // Trigger navigation when clicked
             >
-              <FaAngleDoubleDown className="w-5 h-5 text-white" />
+              <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
             </motion.div>
           </motion.div>
         </div>
