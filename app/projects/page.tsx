@@ -1,14 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import { motion, AnimatePresence } from "framer-motion";
 import useMousePosition from "../utils/useMousePosition";
+import { gsap } from "gsap"; // Import GSAP
+import { FaAngleDoubleDown } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { BsArrowUpRight } from "react-icons/bs";
 
 const Page = () => {
   const { x, y } = useMousePosition();
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null); // Track hovered item
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const size = isHovered ? 300 : 40;
 
   const ProjectItems = [
@@ -39,13 +44,60 @@ const Page = () => {
     },
   ];
 
+  const handleItemClick = (link: string) => {
+    setIsClicked(true);
+    setTimeout(() => {
+      window.open(link, "_blank");
+    }, 600);
+  };
+
+  useEffect(() => {
+    // GSAP animation for slide-up effect on component mount
+    gsap.fromTo(
+      ".project_main, .project_body",
+      {
+        opacity: 0,
+        y: 50, // Start below
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+      }
+    );
+  }, []); // Run only on component mount
+
+  const arrowVariant = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { delay: 1.5, duration: 1, ease: "easeOut" },
+    },
+  };
+
+  const router = useRouter();
+  const handleNavigate = () => {
+    // Create a smooth page transition using GSAP
+    gsap.to(".project_main, .project_body", {
+      opacity: 0,
+      y: -50, // Slide the content up a bit
+      duration: 0.7,
+      ease: "power2.inOut",
+      onComplete: () => {
+        router.push("/contacts"); // Navigate to the About page after animation
+      },
+    });
+  };
+
   return (
     <div className="relative w-screen">
       <div>
-        <div className="text-9xl 2xl:text-[256px] urbanshock text-[#EEE9C7] project_main ">
+        <div className="text-9xl 2xl:text-[256px] urbanshock text-[#EEE9C7] project_main">
           <motion.div
             animate={{
-              WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`, // Center the mask at mouse position
+              WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`,
               WebkitMaskSize: `${size}px`,
             }}
             transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
@@ -58,7 +110,7 @@ const Page = () => {
               PROJECTS
             </h1>
           </motion.div>
-          <motion.div className="project_body flex justify-start gap-10 items-center flex-col ">
+          <motion.div className="project_body flex justify-start gap-10 items-center flex-col">
             <h1>PROJECTS</h1>
           </motion.div>
 
@@ -66,27 +118,28 @@ const Page = () => {
           <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full lg:px-32">
             {ProjectItems.map((item) => (
               <div
-                className="project_item_border border-y cursor-pointer py-10 flex justify-start items-center"
+                className="project_item_border border-y cursor-pointer py-10 flex justify-between items-center"
                 key={item.name}
-                onMouseEnter={() => setHoveredItem(item.imgSrc)} // Show image on hover
-                onMouseLeave={() => setHoveredItem(null)} // Hide image on leave
-                onClick={() => window.open(item.link, "_blank")} // Open link in new tab
+                onMouseEnter={() => setHoveredItem(item.imgSrc)}
+                onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => handleItemClick(item.link)}
               >
                 <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
+                <BsArrowUpRight className="mr-8 max-md:mr4" />
               </div>
             ))}
           </section>
 
           {/* Image that follows the cursor with fade in/out transitions */}
           <AnimatePresence>
-            {hoveredItem && (
+            {hoveredItem && !isClicked && (
               <motion.img
-                key={hoveredItem} // Key for proper animation switching
+                key={hoveredItem}
                 src={hoveredItem}
                 alt="Project preview"
-                initial={{ opacity: 0, y: -50 }} // Starting position and opacity
-                animate={{ opacity: 1, y: 0 }} // Fade in and move to original position
-                exit={{ opacity: 0, y: 50 }} // Fade out and move slightly down
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
                 style={{
                   position: "fixed",
                   top: y + 20,
@@ -96,11 +149,38 @@ const Page = () => {
                   pointerEvents: "none",
                   borderRadius: "15px",
                 }}
-                transition={{ ease: "easeInOut", duration: 0.6 }} // Smooth transition
+                transition={{ ease: "easeInOut", duration: 0.6 }}
                 className="z-50"
               />
             )}
+            {isClicked && (
+              <motion.div
+                key="fade-out"
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+              />
+            )}
           </AnimatePresence>
+          <motion.div
+            className=" bottom-10 fixed z-[999]"
+            variants={arrowVariant}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div
+              className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+              whileHover={{
+                scale: 1.2, // Slight scaling effect on hover
+                rotate: 360, // Rotate the icon on hover
+                transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
+              }}
+              onClick={handleNavigate} // Trigger navigation when clicked
+            >
+              <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </div>
