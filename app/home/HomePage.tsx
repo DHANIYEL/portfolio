@@ -79,7 +79,7 @@ const HomePage = () => {
 
   return (
     <div className="relative w-screen h-screen">
-      <div className="text-[256px] urbanshock text-[#EEE9C7] main">
+      <div className="text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7] main">
         <motion.div
           className="mask"
           animate={{
