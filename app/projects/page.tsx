@@ -15,22 +15,27 @@ const Page = () => {
     {
       name: "Gemini-Clone",
       imgSrc: "/assets/hoverImages/gemini-clone.png", // Correct path
+      link: "https://gemini-clone-two-psi.vercel.app/", // Add the link
     },
     {
       name: "Car Hub",
       imgSrc: "/assets/hoverImages/carhub.png", // Correct path
+      link: "https://carhub-two.vercel.app/", // Add the link
     },
     {
       name: "Hoster",
       imgSrc: "/assets/hoverImages/cloud.png", // Correct path
+      link: "https://serverninja.in/", // Add the link
     },
     {
       name: "Nike",
       imgSrc: "/assets/hoverImages/nike.png", // Correct path
+      link: "https://nike-app-tailwindcss-bice.vercel.app/", // Add the link
     },
     {
       name: "Institute",
       imgSrc: "/assets/hoverImages/institute.png", // Correct path
+      link: "https://vidyalaya-inst.vercel.app/", // Add the link
     },
   ];
 
@@ -65,6 +70,7 @@ const Page = () => {
                 key={item.name}
                 onMouseEnter={() => setHoveredItem(item.imgSrc)} // Show image on hover
                 onMouseLeave={() => setHoveredItem(null)} // Hide image on leave
+                onClick={() => window.open(item.link, "_blank")} // Open link in new tab
               >
                 <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
               </div>
@@ -78,9 +84,9 @@ const Page = () => {
                 key={hoveredItem} // Key for proper animation switching
                 src={hoveredItem}
                 alt="Project preview"
-                initial={{ opacity: 0, x: -50 }} // Starting position and opacity
-                animate={{ opacity: 1, x: 0 }} // Fade in and move to original position
-                exit={{ opacity: 0, x: 50 }} // Fade out and move slightly right
+                initial={{ opacity: 0, y: -50 }} // Starting position and opacity
+                animate={{ opacity: 1, y: 0 }} // Fade in and move to original position
+                exit={{ opacity: 0, y: 50 }} // Fade out and move slightly down
                 style={{
                   position: "fixed",
                   top: y + 20,
