@@ -7,6 +7,7 @@ import "./style.css";
 
 const About = () => {
   const [section, setSection] = useState("about"); // Track the current section
+  const [span, setSpan] = useState(false); // Track the current section
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 200 : 40;
@@ -33,8 +34,19 @@ const About = () => {
 
   const experienceContent = {
     title: "EXPERIENCE",
-    description:
-      "As a self-taught developer with a passion for crafting engaging user experiences, I’ve spent the past year freelancing and mastering the core principles of web development. My journey has been fueled by dedication, honing my skills in HTML, CSS, JavaScript, and React through hands-on projects and courses from platforms like freeCodeCamp and Udemy. This combination of real-world practice and structured learning has equipped me to build user-friendly, responsive web applications that leave a lasting impression.",
+    description: (
+      <>
+        As a self-taught developer with a passion for crafting engaging user
+        experiences, I’ve spent the{" "}
+        <span className="">past year freelancing </span> and mastering the core
+        principles of web development. Now, I’m a freelancer ready to bring your
+        ideas to life! If you’re interested in collaborating, feel free to hire
+        me. I’ve honed my skills in HTML, CSS, JavaScript, and React through
+        hands-on projects and courses from platforms like freeCodeCamp and
+        Udemy, equipping me to create user-friendly, responsive web applications
+        that leave a lasting impression.
+      </>
+    ),
   };
 
   // Determine which content to display based on the current section

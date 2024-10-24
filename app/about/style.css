@@ -24,9 +24,12 @@
     mask-image: url('/cursor.svg'); /* Removed /public */
     mask-repeat: no-repeat;
     mask-size: 40px;
-    background:#29ffed;
+    background:#f14216;
     position: absolute;
     color: #000;
     z-index: 1;
+     span {
+      font-weight: 600;
+      color: whitesmoke;
+    }
   }
-  
