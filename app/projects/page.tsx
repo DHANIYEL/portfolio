@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Import useRef
 import "./style.css";
 import { motion, AnimatePresence } from "framer-motion";
 import useMousePosition from "../utils/useMousePosition";
@@ -16,6 +16,7 @@ const Page = () => {
   const [isHolding, setIsHolding] = useState(false);
   const [showPopup, setShowPopup] = useState(false); // State for popup message
   const [popupShown, setPopupShown] = useState(false); // State to track if popup has been shown
+  const [holdTimer, setHoldTimer] = useState<NodeJS.Timeout | null>(null); // Timer for hold duration
   const size = isHovered ? 300 : 40;
 
   const ProjectItems = [
@@ -47,14 +48,20 @@ const Page = () => {
   ];
 
   const handleItemHoldRelease = (link: string) => {
-    setIsHolding(false);
-    gsap.to(".hovered-image", {
-      opacity: 0,
-      duration: 0.6,
-      onComplete: () => {
-        window.open(link, "_blank");
-      },
-    });
+    if (holdTimer) {
+      clearTimeout(holdTimer); // Clear timer if the item is released
+    }
+    if (isHolding) {
+      // Only animate if holding
+      setIsHolding(false);
+      gsap.to(".hovered-image", {
+        opacity: 0,
+        duration: 0.6,
+        onComplete: () => {
+          window.open(link, "_blank");
+        },
+      });
+    }
   };
 
   const showHoldPopup = () => {
@@ -143,9 +150,26 @@ const Page = () => {
                 onMouseLeave={() => {
                   setHoveredItem(null);
                   setIsHolding(false);
+                  if (holdTimer) {
+                    clearTimeout(holdTimer); // Clear timer on mouse leave
+                  }
                 }}
-                onMouseDown={() => setIsHolding(true)}
-                onMouseUp={() => handleItemHoldRelease(item.link)}
+                onMouseDown={() => {
+                  setIsHolding(true);
+                  // Start the hold timer
+                  const timer = setTimeout(() => {
+                    handleItemHoldRelease(item.link); // Call release function if holding for 2 seconds
+                  }, 200);
+                  setHoldTimer(timer);
+                }}
+                onMouseUp={() => {
+                  if (holdTimer) {
+                    clearTimeout(holdTimer); // Clear timer on mouse up
+                  } else {
+                    // Navigate immediately on click if not holding
+                    window.open(item.link, "_blank");
+                  }
+                }}
               >
                 <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
                 <BsArrowUpRight className="mr-8 max-md:mr4" />
@@ -193,7 +217,7 @@ const Page = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                Hold & Release
+                Tap & Hold
               </motion.div>
             )}
           </AnimatePresence>
