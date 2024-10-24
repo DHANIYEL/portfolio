@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import useMousePosition from "../utils/useMousePosition";
 import { motion, AnimatePresence } from "framer-motion";
 import "./style.css";
+import { FaAngleDoubleDown } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { gsap } from "gsap";
 
 const About = () => {
   const [section, setSection] = useState("about"); // Track the current section
-  const [span, setSpan] = useState(false); // Track the current section
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 200 : 40;
@@ -49,8 +51,31 @@ const About = () => {
     ),
   };
 
+  const arrowVariant = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { delay: 1.5, duration: 1, ease: "easeOut" },
+    },
+  };
+
   // Determine which content to display based on the current section
   const content = section === "about" ? aboutContent : experienceContent;
+
+  const router = useRouter();
+  const handleNavigate = () => {
+    // Create a smooth page transition using GSAP
+    gsap.to(".about_main, .about_body", {
+      opacity: 0,
+      y: -50, // Slide the content up a bit
+      duration: 0.7,
+      ease: "power2.inOut",
+      onComplete: () => {
+        router.push("/projects"); // Navigate to the About page after animation
+      },
+    });
+  };
 
   return (
     <div className="relative w-screen">
@@ -135,6 +160,24 @@ const About = () => {
               </p>
             </motion.div>
           </AnimatePresence>
+        </motion.div>
+        <motion.div
+          className="absolute bottom-5 z-[999]"
+          variants={arrowVariant}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div
+            className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+            whileHover={{
+              scale: 1.2, // Slight scaling effect on hover
+              rotate: 360, // Rotate the icon on hover
+              transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
+            }}
+            onClick={handleNavigate} // Trigger navigation when clicked
+          >
+            <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
+          </motion.div>
         </motion.div>
       </div>
     </div>
