@@ -13,7 +13,9 @@ const Page = () => {
   const { x, y } = useMousePosition();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isHolding, setIsHolding] = useState(false); // State for holding
+  const [isHolding, setIsHolding] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); // State for popup message
+  const [popupShown, setPopupShown] = useState(false); // State to track if popup has been shown
   const size = isHovered ? 300 : 40;
 
   const ProjectItems = [
@@ -45,15 +47,23 @@ const Page = () => {
   ];
 
   const handleItemHoldRelease = (link: string) => {
-    setIsHolding(false); // Reset holding state
-    // GSAP animation for fade-out effect before navigation
+    setIsHolding(false);
     gsap.to(".hovered-image", {
       opacity: 0,
       duration: 0.6,
       onComplete: () => {
-        window.open(link, "_blank"); // Open the link after animation completes
+        window.open(link, "_blank");
       },
     });
+  };
+
+  const showHoldPopup = () => {
+    setShowPopup(true);
+    setPopupShown(true); // Set popup shown to true
+    // Hide the popup after 5 seconds
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -71,7 +81,7 @@ const Page = () => {
         ease: "power2.out",
       }
     );
-  }, []); // Run only on component mount
+  }, []);
 
   const arrowVariant = {
     hidden: { y: 50, opacity: 0 },
@@ -123,13 +133,19 @@ const Page = () => {
               <div
                 className="project_item_border border-y cursor-pointer py-10 flex justify-between items-center"
                 key={item.name}
-                onMouseEnter={() => setHoveredItem(item.imgSrc)}
+                onMouseEnter={() => {
+                  setHoveredItem(item.imgSrc);
+                  // Show the popup message only if it hasn't been shown yet
+                  if (!popupShown) {
+                    showHoldPopup();
+                  }
+                }}
                 onMouseLeave={() => {
                   setHoveredItem(null);
-                  setIsHolding(false); // Reset holding state when leaving
+                  setIsHolding(false);
                 }}
-                onMouseDown={() => setIsHolding(true)} // Trigger on mouse down
-                onMouseUp={() => handleItemHoldRelease(item.link)} // Handle release
+                onMouseDown={() => setIsHolding(true)}
+                onMouseUp={() => handleItemHoldRelease(item.link)}
               >
                 <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
                 <BsArrowUpRight className="mr-8 max-md:mr4" />
@@ -146,7 +162,7 @@ const Page = () => {
                 initial={{ opacity: 0, y: -50 }}
                 animate={
                   isHolding ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }
-                } // Keep visible during hold
+                }
                 exit={{ opacity: 0, y: 50 }}
                 style={{
                   position: "fixed",
@@ -157,9 +173,28 @@ const Page = () => {
                   pointerEvents: "none",
                   borderRadius: "15px",
                 }}
-                className="z-50 hovered-image" // Added class for targeting in GSAP animation
+                className="z-50 hovered-image"
                 transition={{ ease: "easeInOut", duration: 0.6 }}
               />
+            )}
+          </AnimatePresence>
+
+          {/* Popup Message */}
+          <AnimatePresence>
+            {showPopup && (
+              <motion.div
+                className="popup-message fixed bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans text-white px-3 py-2 rounded-lg"
+                style={{
+                  top: y - 50,
+                  left: x + 30,
+                }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                Hold & Release
+              </motion.div>
             )}
           </AnimatePresence>
 
@@ -176,7 +211,7 @@ const Page = () => {
                 rotate: 360,
                 transition: { duration: 0.4, ease: "easeInOut" },
               }}
-              onClick={handleNavigate} // Trigger navigation when clicked
+              onClick={handleNavigate}
             >
               <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
             </motion.div>
