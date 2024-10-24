@@ -37,15 +37,17 @@ const page = () => {
           <motion.div className="project_body flex justify-start gap-10 items-center flex-col ">
             <h1>PROJESTS</h1>
           </motion.div>
-          <section className="porsche text-5xl absolute w-full lg:px-32">
+          <section className="porsche 2xl:text-5xl z-50 text-3xl absolute w-full lg:px-32">
             {ProjectItems.map((item) => (
-              <div className="border-y border-[#5ef13d] py-16 flex justify-start items-center">
-                <h2 className="ml-8" key={item}>
-                  {item}
-                </h2>
+              <div
+                className="border-y cursor-pointer border-[#5ef13d] py-10 flex justify-start items-center"
+                key={item}
+              >
+                <h2 className="ml-8">{item}</h2>
               </div>
             ))}
           </section>
+          <div></div>
         </div>
       </div>
     </div>
