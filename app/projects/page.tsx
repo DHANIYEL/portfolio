@@ -8,6 +8,13 @@ const page = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 200 : 40;
+  const ProjectItems = [
+    "Gemini-Clone",
+    "Car Hub",
+    "Hoster",
+    "Nike",
+    "Institute",
+  ];
   return (
     <div className="relative w-screen">
       <div>
@@ -30,10 +37,14 @@ const page = () => {
           <motion.div className="project_body flex justify-start gap-10 items-center flex-col ">
             <h1>PROJESTS</h1>
           </motion.div>
-          <section className="porsche text-6xl absolute w-full lg:px-32">
-            <div className="border-y border-[#5ef13d] py-10 flex justify-start items-center">
-              <h2 className="ml-5">WORK</h2>
-            </div>
+          <section className="porsche text-5xl absolute w-full lg:px-32">
+            {ProjectItems.map((item) => (
+              <div className="border-y border-[#5ef13d] py-16 flex justify-start items-center">
+                <h2 className="ml-8" key={item}>
+                  {item}
+                </h2>
+              </div>
+            ))}
           </section>
         </div>
       </div>
