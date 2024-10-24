@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import "./style.css";
 
 const About = () => {
+  const [section, setSection] = useState("about"); // Track the current section
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 200 : 40;
@@ -22,6 +23,21 @@ const About = () => {
       },
     },
   };
+
+  const aboutContent = {
+    title: "ABOUT ME",
+    description:
+      "With one year of hands-on experience, I specialize in crafting user-friendly, responsive web applications. I’m highly proficient in HTML, CSS, and JavaScript, with a deep understanding of front-end development principles. I am passionate about designing visually appealing and interactive user experiences that stand out.",
+  };
+
+  const experienceContent = {
+    title: "EXPERIENCE",
+    description:
+      "As a self-taught developer with a passion for crafting engaging user experiences, I’ve spent the past year freelancing and mastering the core principles of web development. My journey has been fueled by dedication, honing my skills in HTML, CSS, JavaScript, and React through hands-on projects and courses from platforms like freeCodeCamp and Udemy. This combination of real-world practice and structured learning has equipped me to build user-friendly, responsive web applications that leave a lasting impression.",
+  };
+
+  // Determine which content to display based on the current section
+  const content = section === "about" ? aboutContent : experienceContent;
 
   return (
     <div className="relative w-screen">
@@ -41,9 +57,12 @@ const About = () => {
             animate="visible" // Animate to visible
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="text-center"
+            className="text-center cursor-pointer"
+            onClick={() =>
+              setSection(section === "about" ? "experience" : "about")
+            } // Toggle section on click
           >
-            ABOUT ME
+            {content.title}
           </motion.h1>
 
           {/* Paragraph with fade and slide-up animation */}
@@ -56,12 +75,7 @@ const About = () => {
               onMouseLeave={() => setIsHovered(false)}
               className="font-light font-sans text-4xl leading-relaxed max-w-screen-xl text-black text-center px-5"
             >
-              With one year of hands-on experience, I specialize in crafting
-              user-friendly, responsive web applications. I’m highly proficient
-              in HTML, CSS, and JavaScript, with a deep understanding of
-              front-end development principles. I am passionate about designing
-              visually appealing and interactive user experiences that stand
-              out.
+              {content.description}
             </motion.p>
           </motion.div>
         </motion.div>
@@ -73,8 +87,11 @@ const About = () => {
             initial="hidden" // Start hidden
             animate="visible" // Animate to visible
             className="text-center"
+            onClick={() =>
+              setSection(section === "about" ? "experience" : "about")
+            } // Toggle section on click
           >
-            ABOUT ME
+            {content.title}
           </motion.h1>
           {/* Additional paragraph with fade and slide-up animation */}
           <motion.div
@@ -83,12 +100,7 @@ const About = () => {
             animate="visible" // Animate to visible
           >
             <p className="font-extralight font-sans text-4xl leading-relaxed max-w-screen-xl px-5 text-center">
-              With one year of hands-on experience, I specialize in crafting
-              user-friendly, responsive web applications. I’m highly proficient
-              in HTML, CSS, and JavaScript, with a deep understanding of
-              front-end development principles. I am passionate about designing
-              visually appealing and interactive user experiences that stand
-              out.
+              {content.description}
             </p>
           </motion.div>
         </div>
