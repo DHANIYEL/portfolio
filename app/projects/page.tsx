@@ -13,42 +13,47 @@ const Page = () => {
   const { x, y } = useMousePosition();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+  const [isHolding, setIsHolding] = useState(false); // State for holding
   const size = isHovered ? 300 : 40;
 
   const ProjectItems = [
     {
       name: "Gemini-Clone",
-      imgSrc: "/assets/hoverImages/gemini-clone.png", // Correct path
-      link: "https://gemini-clone-two-psi.vercel.app/", // Add the link
+      imgSrc: "/assets/hoverImages/gemini-clone.png",
+      link: "https://gemini-clone-two-psi.vercel.app/",
     },
     {
       name: "Car Hub",
-      imgSrc: "/assets/hoverImages/carhub.png", // Correct path
-      link: "https://carhub-two.vercel.app/", // Add the link
+      imgSrc: "/assets/hoverImages/carhub.png",
+      link: "https://carhub-two.vercel.app/",
     },
     {
       name: "Hoster",
-      imgSrc: "/assets/hoverImages/cloud.png", // Correct path
-      link: "https://serverninja.in/", // Add the link
+      imgSrc: "/assets/hoverImages/cloud.png",
+      link: "https://serverninja.in/",
     },
     {
       name: "Nike",
-      imgSrc: "/assets/hoverImages/nike.png", // Correct path
-      link: "https://nike-app-tailwindcss-bice.vercel.app/", // Add the link
+      imgSrc: "/assets/hoverImages/nike.png",
+      link: "https://nike-app-tailwindcss-bice.vercel.app/",
     },
     {
       name: "Institute",
-      imgSrc: "/assets/hoverImages/institute.png", // Correct path
-      link: "https://vidyalaya-inst.vercel.app/", // Add the link
+      imgSrc: "/assets/hoverImages/institute.png",
+      link: "https://vidyalaya-inst.vercel.app/",
     },
   ];
 
-  const handleItemClick = (link: string) => {
-    setIsClicked(true);
-    setTimeout(() => {
-      window.open(link, "_blank");
-    }, 600);
+  const handleItemHoldRelease = (link: string) => {
+    setIsHolding(false); // Reset holding state
+    // GSAP animation for fade-out effect before navigation
+    gsap.to(".hovered-image", {
+      opacity: 0,
+      duration: 0.6,
+      onComplete: () => {
+        window.open(link, "_blank"); // Open the link after animation completes
+      },
+    });
   };
 
   useEffect(() => {
@@ -57,7 +62,7 @@ const Page = () => {
       ".project_main, .project_body",
       {
         opacity: 0,
-        y: 50, // Start below
+        y: 50,
       },
       {
         opacity: 1,
@@ -79,14 +84,13 @@ const Page = () => {
 
   const router = useRouter();
   const handleNavigate = () => {
-    // Create a smooth page transition using GSAP
     gsap.to(".project_main, .project_body", {
       opacity: 0,
-      y: -50, // Slide the content up a bit
+      y: -50,
       duration: 0.7,
       ease: "power2.inOut",
       onComplete: () => {
-        router.push("/contacts"); // Navigate to the About page after animation
+        router.push("/contacts");
       },
     });
   };
@@ -114,15 +118,18 @@ const Page = () => {
             <h1>PROJECTS</h1>
           </motion.div>
 
-          {/* Section containing project links */}
           <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full lg:px-32">
             {ProjectItems.map((item) => (
               <div
                 className="project_item_border border-y cursor-pointer py-10 flex justify-between items-center"
                 key={item.name}
                 onMouseEnter={() => setHoveredItem(item.imgSrc)}
-                onMouseLeave={() => setHoveredItem(null)}
-                onClick={() => handleItemClick(item.link)}
+                onMouseLeave={() => {
+                  setHoveredItem(null);
+                  setIsHolding(false); // Reset holding state when leaving
+                }}
+                onMouseDown={() => setIsHolding(true)} // Trigger on mouse down
+                onMouseUp={() => handleItemHoldRelease(item.link)} // Handle release
               >
                 <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
                 <BsArrowUpRight className="mr-8 max-md:mr4" />
@@ -130,15 +137,16 @@ const Page = () => {
             ))}
           </section>
 
-          {/* Image that follows the cursor with fade in/out transitions */}
           <AnimatePresence>
-            {hoveredItem && !isClicked && (
+            {hoveredItem && (
               <motion.img
                 key={hoveredItem}
                 src={hoveredItem}
                 alt="Project preview"
                 initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={
+                  isHolding ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }
+                } // Keep visible during hold
                 exit={{ opacity: 0, y: 50 }}
                 style={{
                   position: "fixed",
@@ -149,22 +157,14 @@ const Page = () => {
                   pointerEvents: "none",
                   borderRadius: "15px",
                 }}
+                className="z-50 hovered-image" // Added class for targeting in GSAP animation
                 transition={{ ease: "easeInOut", duration: 0.6 }}
-                className="z-50"
-              />
-            )}
-            {isClicked && (
-              <motion.div
-                key="fade-out"
-                initial={{ opacity: 1 }}
-                animate={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
               />
             )}
           </AnimatePresence>
+
           <motion.div
-            className=" bottom-10 fixed z-[999]"
+            className="bottom-10 fixed z-[999]"
             variants={arrowVariant}
             initial="hidden"
             animate="visible"
@@ -172,9 +172,9 @@ const Page = () => {
             <motion.div
               className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
               whileHover={{
-                scale: 1.2, // Slight scaling effect on hover
-                rotate: 360, // Rotate the icon on hover
-                transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
+                scale: 1.2,
+                rotate: 360,
+                transition: { duration: 0.4, ease: "easeInOut" },
               }}
               onClick={handleNavigate} // Trigger navigation when clicked
             >
