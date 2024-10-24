@@ -7,7 +7,7 @@ import useMousePosition from "../utils/useMousePosition";
 const page = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
-  const size = isHovered ? 200 : 40;
+  const size = isHovered ? 300 : 40;
   const ProjectItems = [
     "Gemini-Clone",
     "Car Hub",
@@ -18,7 +18,7 @@ const page = () => {
   return (
     <div className="relative w-screen">
       <div>
-        <div className="text-9xl urbanshock text-[#EEE9C7] project_main ">
+        <div className="text-9xl 2xl:text-[256px] urbanshock text-[#EEE9C7] project_main ">
           <motion.div
             animate={{
               WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`, // Center the mask at mouse position

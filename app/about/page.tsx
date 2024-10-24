@@ -79,7 +79,7 @@ const About = () => {
 
   return (
     <div className="relative w-screen overflow-y-auto">
-      <div className="text-9xl urbanshock text-[#EEE9C7] about_main">
+      <div className="text-9xl 2xl:text-[256px] urbanshock text-[#EEE9C7] about_main">
         <motion.div
           className="about_mask flex justify-start gap-10 items-center flex-col"
           animate={{
