@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import htmlIcon from "../../public/icon/html.svg";
 import cssIcon from "../../public/icon/css.svg";
 import jsIcon from "../../public/icon/js.svg";
@@ -19,16 +21,79 @@ import gsapIcon from "../../public/icon/gsap-greensock.svg";
 import gitIcon from "../../public/icon/git.svg";
 import githubIcon from "../../public/icon/github.svg";
 import vscodeIcon from "../../public/icon/vscode.svg";
+import { AnimatePresence, motion } from "framer-motion";
+import useMousePosition from "../utils/useMousePosition";
 
 const page = () => {
+  const { x, y } = useMousePosition();
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupShown, setPopupShown] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const fadeSlideVariant = {
+    hidden: { opacity: 0, y: 30 }, // Start off-screen slightly down
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8, // Adjust duration for the fade effect
+        ease: "easeInOut", // Smooth easing function
+      },
+    },
+    exit: { opacity: 0, y: 20, transition: { duration: 0.3 } }, // Exit animation for smooth fade-out
+  };
+
+  // popup
+
+  const showHoldPopup = () => {
+    setShowPopup(true);
+    setPopupShown(true); // Set popup shown to true
+    // Hide the popup after 5 seconds
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5000);
+  };
   return (
-    <div className=" h-screen  w-screen overflow-y-auto">
-      <div className="flex justify-center py-10">
-        <h1 className="calcio text-9xl py-10 max-md:text-7xl text-txt">
+    <motion.div
+      variants={fadeSlideVariant}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className=" h-screen  w-screen overflow-y-auto"
+    >
+      <div className="flex justify-center py-10 ">
+        <h1
+          onMouseEnter={() => {
+            setIsHovered(true);
+            if (!popupShown) {
+              showHoldPopup();
+            }
+          }}
+          onMouseLeave={() => setIsHovered(false)}
+          className="calcio text-9xl py-10 cursor-pointer max-md:text-7xl text-txt"
+        >
           SKILLS
         </h1>
+        <AnimatePresence>
+          {showPopup && (
+            <motion.div
+              className="popup-message fixed bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans text-white px-3 py-2 rounded-lg"
+              style={{
+                top: y - 50,
+                left: x + 30,
+              }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              Tap 3 Times
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <div className="flex flex-col justify-center p-10 max-sm:p-2 max-w-screen-lg items-center">
+      <div className="flex flex-col justify-center p-10 mb-10 max-sm:p-2 items-center">
         {/* main div */}
         <div className="flex gap-20 max-md:flex-col ">
           <div className="flex flex-col gap-3 justify-center items-center">
@@ -261,7 +326,7 @@ const page = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
