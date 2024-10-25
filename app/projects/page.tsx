@@ -169,7 +169,7 @@ const Page = () => {
                 }}
               >
                 <h2 className=" max-md:px-16 max-sm:px-6 px-32">{item.name}</h2>
-                <BsArrowUpRight className="mr-10 max-md:mr-4 " />
+                <BsArrowUpRight className="mr-10 max-md:mr-4 color_black " />
               </div>
             ))}
           </section>
