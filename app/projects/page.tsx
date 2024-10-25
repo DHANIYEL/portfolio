@@ -135,7 +135,7 @@ const Page = () => {
             <h1>PROJECTS</h1>
           </motion.div>
 
-          <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full lg:px-32">
+          <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full ">
             {ProjectItems.map((item) => (
               <div
                 className="project_item_border border-y cursor-pointer py-7 flex justify-between items-center"
@@ -168,8 +168,8 @@ const Page = () => {
                   }
                 }}
               >
-                <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
-                <BsArrowUpRight className="mr-8 max-md:mr-4" />
+                <h2 className=" max-md:px-16 max-sm:px-6 px-32">{item.name}</h2>
+                <BsArrowUpRight className="mr-10 max-md:mr-4 " />
               </div>
             ))}
           </section>
