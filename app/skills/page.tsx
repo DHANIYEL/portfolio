@@ -13,7 +13,7 @@ const page = () => {
         {/* grid layout 1st languages */}
         <div className="">
           {/*  js html */}
-          <div className="flex gap-10">
+          <div className="flex gap-5">
             <div className="grid grid-cols-2 gap-3 w-full">
               <div className="bg-[#F16529] rounded-md overflow-hidden flex justify-center p-5">
                 <Image
