@@ -33,22 +33,20 @@ const page = () => {
 
   const leftIconVariant = {
     hidden: { opacity: 0, x: -100 },
-    visible: {
+    visible: (index) => ({
       opacity: 1,
       x: 0,
-      transition: { duration: 0.9, delay: 0.3 },
-      ease: "easeIn",
-    },
+      transition: { duration: 0.9, delay: index * 0.2 },
+    }),
   };
 
   const rightIconVariant = {
     hidden: { opacity: 0, x: 100 },
-    visible: {
+    visible: (index) => ({
       opacity: 1,
       x: 0,
-      transition: { duration: 0.9, delay: 0.3 },
-      ease: "easeIn",
-    },
+      transition: { duration: 0.9, delay: index * 0.2 },
+    }),
   };
   const fadeSlideVariant = {
     hidden: { opacity: 0, y: 30 }, // Start off-screen slightly down
@@ -122,6 +120,7 @@ const page = () => {
               <div className="grid grid-cols-2 gap-5 flex-1 w-full">
                 <motion.div
                   variants={leftIconVariant}
+                  custom={1}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
@@ -137,6 +136,7 @@ const page = () => {
                 </motion.div>
                 <motion.div
                   variants={leftIconVariant}
+                  custom={0}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#2965F1] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
@@ -152,6 +152,7 @@ const page = () => {
                 </motion.div>
                 <motion.div
                   variants={leftIconVariant}
+                  custom={1}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#F16529] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
@@ -167,6 +168,7 @@ const page = () => {
                 </motion.div>
                 <motion.div
                   variants={leftIconVariant}
+                  custom={2}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
@@ -186,6 +188,7 @@ const page = () => {
               <motion.div
                 variants={leftIconVariant}
                 initial="hidden"
+                custom={3}
                 animate="visible"
                 className="bg-[#F7DF1E] rounded-md  flex justify-center items-end flex-1 px-5"
               >
@@ -207,6 +210,7 @@ const page = () => {
               <div className="flex gap-3">
                 <motion.div
                   variants={leftIconVariant}
+                  custom={4}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#23272F] rounded-md  flex justify-center items-center  max-sm:p-2 p-6"
@@ -224,6 +228,7 @@ const page = () => {
                   {/* Smaller TS and SAAS icons */}
                   <motion.div
                     variants={leftIconVariant}
+                    custom={5}
                     initial="hidden"
                     animate="visible"
                     className="bg-[#017ACB] rounded-md  flex justify-center items-center  max-sm:p-2 p-4"
@@ -239,6 +244,7 @@ const page = () => {
                   </motion.div>
                   <motion.div
                     variants={leftIconVariant}
+                    custom={6}
                     initial="hidden"
                     animate="visible"
                     className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-4"
@@ -254,6 +260,7 @@ const page = () => {
                   </motion.div>
                   <motion.div
                     variants={leftIconVariant}
+                    custom={7}
                     initial="hidden"
                     animate="visible"
                     className="bg-[#000] rounded-md col-span-2   flex justify-center items-center  max-sm:p-2 p-6"
@@ -273,6 +280,7 @@ const page = () => {
                   <div className="flex flex-col gap-3">
                     <motion.div
                       variants={leftIconVariant}
+                      custom={8}
                       initial="hidden"
                       animate="visible"
                       className="bg-[#15161B] rounded-md  max-sm:p-2  flex justify-center items-center p-6"
@@ -288,6 +296,7 @@ const page = () => {
                     </motion.div>
                     <motion.div
                       variants={leftIconVariant}
+                      custom={9}
                       initial="hidden"
                       animate="visible"
                       className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-6"
@@ -310,6 +319,7 @@ const page = () => {
             <div className="flex flex-col gap-3 justify-start">
               <motion.div
                 variants={rightIconVariant}
+                custom={0}
                 initial="hidden"
                 animate="visible"
                 className="bg-[#38393F] rounded-md w-full px-6  py-10"
@@ -326,6 +336,7 @@ const page = () => {
               <div className="flex gap-3">
                 <motion.div
                   variants={rightIconVariant}
+                  custom={1}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md w-full h-full   p-6"
@@ -341,6 +352,7 @@ const page = () => {
                 </motion.div>
                 <motion.div
                   variants={rightIconVariant}
+                  custom={2}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md flex justify-center w-full   h-full p-6"
@@ -357,14 +369,10 @@ const page = () => {
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <motion.div
-                variants={rightIconVariant}
-                initial="hidden"
-                animate="visible"
-                className="flex gap-3"
-              >
+              <div className="flex gap-3">
                 <motion.div
                   variants={rightIconVariant}
+                  custom={3}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-3.5"
@@ -380,6 +388,7 @@ const page = () => {
                 </motion.div>
                 <motion.div
                   variants={rightIconVariant}
+                  custom={4}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#00005B] rounded-md flex justify-center w-full  max-sm:p-2 p-6"
@@ -393,9 +402,10 @@ const page = () => {
                     className="object-contain w-full h-full"
                   />
                 </motion.div>
-              </motion.div>
+              </div>
               <motion.div
                 variants={rightIconVariant}
+                custom={5}
                 initial="hidden"
                 animate="visible"
                 className="bg-[#0D1117] rounded-md flex justify-center w-full  max-sm:p-2 p-6"
@@ -412,6 +422,7 @@ const page = () => {
               <div className="flex gap-3">
                 <motion.div
                   variants={rightIconVariant}
+                  custom={6}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-5"
@@ -427,6 +438,7 @@ const page = () => {
                 </motion.div>
                 <motion.div
                   variants={rightIconVariant}
+                  custom={7}
                   initial="hidden"
                   animate="visible"
                   className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-5"
