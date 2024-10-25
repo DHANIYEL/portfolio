@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 
 const About = () => {
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupShown, setPopupShown] = useState(false);
   const [section, setSection] = useState("about"); // Track the current section
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
@@ -60,6 +62,15 @@ const About = () => {
     },
   };
 
+  const showHoldPopup = () => {
+    setShowPopup(true);
+    setPopupShown(true); // Set popup shown to true
+    // Hide the popup after 5 seconds
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
+
   // Determine which content to display based on the current section
   const content = section === "about" ? aboutContent : experienceContent;
 
@@ -97,7 +108,12 @@ const About = () => {
               initial="hidden" // Start hidden
               animate="visible" // Animate to visible
               exit="exit" // Exit animation when removed
-              onMouseEnter={() => setIsHovered(true)}
+              onMouseEnter={() => {
+                setIsHovered(true);
+                if (!popupShown) {
+                  showHoldPopup();
+                }
+              }}
               onMouseLeave={() => setIsHovered(false)}
               className="text-center cursor-pointer"
               onClick={() =>
@@ -161,6 +177,23 @@ const About = () => {
             </motion.div>
           </AnimatePresence>
         </motion.div>
+        <AnimatePresence>
+          {showPopup && (
+            <motion.div
+              className="popup-message fixed bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans text-white px-3 py-2 rounded-lg"
+              style={{
+                top: y - 50,
+                left: x + 30,
+              }}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              Click
+            </motion.div>
+          )}
+        </AnimatePresence>
         <motion.div
           className=" bottom-10 fixed z-[999]"
           variants={arrowVariant}
