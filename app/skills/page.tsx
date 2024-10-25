@@ -21,7 +21,7 @@ import gsapIcon from "../../public/icon/gsap-greensock.svg";
 import gitIcon from "../../public/icon/git.svg";
 import githubIcon from "../../public/icon/github.svg";
 import vscodeIcon from "../../public/icon/vscode.svg";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, easeIn, motion } from "framer-motion";
 import useMousePosition from "../utils/useMousePosition";
 
 const page = () => {
@@ -31,6 +31,25 @@ const page = () => {
   const [popupShown, setPopupShown] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  const leftIconVariant = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.9 },
+      ease: "easeIn",
+    },
+  };
+
+  const rightIconVariant = {
+    hidden: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.9 },
+      ease: "easeIn",
+    },
+  };
   const fadeSlideVariant = {
     hidden: { opacity: 0, y: 30 }, // Start off-screen slightly down
     visible: {
@@ -101,7 +120,12 @@ const page = () => {
             <div className="flex gap-5 w-full max-w-screen-lg">
               {/* grid section */}
               <div className="grid grid-cols-2 gap-5 flex-1 w-full">
-                <div className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6">
+                <motion.div
+                  variants={leftIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
+                >
                   <Image
                     src={viteIcon}
                     alt="img"
@@ -110,8 +134,13 @@ const page = () => {
                     height={100}
                     className="object-contain w-full h-full"
                   />
-                </div>
-                <div className="bg-[#2965F1] rounded-md  flex justify-center items-center max-sm:p-2 p-6">
+                </motion.div>
+                <motion.div
+                  variants={leftIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#2965F1] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
+                >
                   <Image
                     src={cssIcon}
                     alt="img"
@@ -120,8 +149,13 @@ const page = () => {
                     height={100}
                     className="object-contain w-full h-full"
                   />
-                </div>
-                <div className="bg-[#F16529] rounded-md  flex justify-center items-center max-sm:p-2 p-6">
+                </motion.div>
+                <motion.div
+                  variants={leftIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#F16529] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
+                >
                   <Image
                     src={htmlIcon}
                     alt="img"
@@ -130,8 +164,13 @@ const page = () => {
                     height={100}
                     className="object-contain w-full h-full"
                   />
-                </div>
-                <div className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6">
+                </motion.div>
+                <motion.div
+                  variants={leftIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
+                >
                   <Image
                     src={tailwindIcon}
                     alt="img"
@@ -140,11 +179,16 @@ const page = () => {
                     height={100}
                     className="object-contain w-full h-full"
                   />
-                </div>
+                </motion.div>
               </div>
 
               {/* JS big icon, slightly larger */}
-              <div className="bg-[#F7DF1E] rounded-md  flex justify-center items-end flex-1 px-5">
+              <motion.div
+                variants={leftIconVariant}
+                initial="hidden"
+                animate="visible"
+                className="bg-[#F7DF1E] rounded-md  flex justify-center items-end flex-1 px-5"
+              >
                 <div className="w-3/4 h-3/4 flex justify-center items-center">
                   <Image
                     src={jsIcon}
@@ -155,13 +199,18 @@ const page = () => {
                     className="object-contain"
                   />
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             {/* second section  */}
             <div className="flex w-full">
               <div className="flex gap-3">
-                <div className="bg-[#23272F] rounded-md  flex justify-center items-center  max-sm:p-2 p-6">
+                <motion.div
+                  variants={leftIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#23272F] rounded-md  flex justify-center items-center  max-sm:p-2 p-6"
+                >
                   <Image
                     src={reactIcon}
                     alt="img"
@@ -170,10 +219,15 @@ const page = () => {
                     height={100}
                     className="object-contain"
                   />
-                </div>
+                </motion.div>
                 <div className="grid grid-cols-2 gap-3">
                   {/* Smaller TS and SAAS icons */}
-                  <div className="bg-[#017ACB] rounded-md  flex justify-center items-center  max-sm:p-2 p-4">
+                  <motion.div
+                    variants={leftIconVariant}
+                    initial="hidden"
+                    animate="visible"
+                    className="bg-[#017ACB] rounded-md  flex justify-center items-center  max-sm:p-2 p-4"
+                  >
                     <Image
                       src={tsIcon}
                       alt="img"
@@ -182,8 +236,13 @@ const page = () => {
                       height={75} // Smaller size
                       className="object-contain"
                     />
-                  </div>
-                  <div className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-4">
+                  </motion.div>
+                  <motion.div
+                    variants={leftIconVariant}
+                    initial="hidden"
+                    animate="visible"
+                    className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-4"
+                  >
                     <Image
                       src={saasIcon}
                       alt="img"
@@ -192,8 +251,13 @@ const page = () => {
                       height={75} // Smaller size
                       className="object-contain"
                     />
-                  </div>
-                  <div className="bg-[#000] rounded-md col-span-2   flex justify-center items-center  max-sm:p-2 p-6">
+                  </motion.div>
+                  <motion.div
+                    variants={leftIconVariant}
+                    initial="hidden"
+                    animate="visible"
+                    className="bg-[#000] rounded-md col-span-2   flex justify-center items-center  max-sm:p-2 p-6"
+                  >
                     {/* Larger Next.js icon */}
                     <Image
                       src={nextIcon}
@@ -203,11 +267,16 @@ const page = () => {
                       height={125} // Larger size
                       className="object-contain"
                     />
-                  </div>
+                  </motion.div>
                 </div>
                 <div>
                   <div className="flex flex-col gap-3">
-                    <div className="bg-[#15161B] rounded-md  max-sm:p-2  flex justify-center items-center p-6">
+                    <motion.div
+                      variants={leftIconVariant}
+                      initial="hidden"
+                      animate="visible"
+                      className="bg-[#15161B] rounded-md  max-sm:p-2  flex justify-center items-center p-6"
+                    >
                       <Image
                         src={nodeIcon}
                         alt="img"
@@ -216,8 +285,13 @@ const page = () => {
                         height={100}
                         className="object-contain w-full h-full"
                       />
-                    </div>
-                    <div className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-6">
+                    </motion.div>
+                    <motion.div
+                      variants={leftIconVariant}
+                      initial="hidden"
+                      animate="visible"
+                      className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-6"
+                    >
                       <Image
                         src={mongoIcon}
                         alt="img"
@@ -226,7 +300,7 @@ const page = () => {
                         height={100}
                         className="object-contain w-full h-full"
                       />
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
@@ -234,7 +308,12 @@ const page = () => {
           </div>
           <div className="flex gap-3 justify-center items-center h-full">
             <div className="flex flex-col gap-3 justify-start">
-              <div className="bg-[#38393F] rounded-md w-full px-6  py-10">
+              <motion.div
+                variants={rightIconVariant}
+                initial="hidden"
+                animate="visible"
+                className="bg-[#38393F] rounded-md w-full px-6  py-10"
+              >
                 <Image
                   src={figmaIcon}
                   alt="img"
@@ -243,9 +322,14 @@ const page = () => {
                   height={80} // Adjusted size for Figma icon
                   className="object-contain"
                 />
-              </div>
+              </motion.div>
               <div className="flex gap-3">
-                <div className="bg-[#0B1120] rounded-md w-full h-full   p-6">
+                <motion.div
+                  variants={rightIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md w-full h-full   p-6"
+                >
                   <Image
                     src={framerIcon}
                     alt="img"
@@ -254,8 +338,13 @@ const page = () => {
                     height={80} // Adjusted size for Framer icon
                     className="object-contain w-full h-full"
                   />
-                </div>
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full   h-full p-6">
+                </motion.div>
+                <motion.div
+                  variants={rightIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md flex justify-center w-full   h-full p-6"
+                >
                   <Image
                     src={gsapIcon}
                     alt="img"
@@ -264,11 +353,16 @@ const page = () => {
                     height={80} // Adjusted size for GSAP icon
                     className="object-contain w-full h-full"
                   />
-                </div>
+                </motion.div>
               </div>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="flex gap-3">
+              <motion.div
+                variants={rightIconVariant}
+                initial="hidden"
+                animate="visible"
+                className="flex gap-3"
+              >
                 <div className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-3.5">
                   <Image
                     src={wordpressIcon}
@@ -279,7 +373,12 @@ const page = () => {
                     className="object-contain w-full h-full"
                   />
                 </div>
-                <div className="bg-[#00005B] rounded-md flex justify-center w-full  max-sm:p-2 p-6">
+                <motion.div
+                  variants={rightIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#00005B] rounded-md flex justify-center w-full  max-sm:p-2 p-6"
+                >
                   <Image
                     src={aeIcon}
                     alt="img"
@@ -288,9 +387,14 @@ const page = () => {
                     height={80} // Adjusted size for AE icon
                     className="object-contain w-full h-full"
                   />
-                </div>
-              </div>
-              <div className="bg-[#0D1117] rounded-md flex justify-center w-full  max-sm:p-2 p-6">
+                </motion.div>
+              </motion.div>
+              <motion.div
+                variants={rightIconVariant}
+                initial="hidden"
+                animate="visible"
+                className="bg-[#0D1117] rounded-md flex justify-center w-full  max-sm:p-2 p-6"
+              >
                 <Image
                   src={vscodeIcon}
                   alt="img"
@@ -299,9 +403,14 @@ const page = () => {
                   height={80} // Adjusted size for VS Code icon
                   className="object-contain w-full h-full"
                 />
-              </div>
+              </motion.div>
               <div className="flex gap-3">
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-5">
+                <motion.div
+                  variants={rightIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-5"
+                >
                   <Image
                     src={gitIcon}
                     alt="img"
@@ -310,8 +419,13 @@ const page = () => {
                     height={80} // Adjusted size for VS Code icon
                     className="object-contain w-full h-full"
                   />
-                </div>
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-5">
+                </motion.div>
+                <motion.div
+                  variants={rightIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-5"
+                >
                   <Image
                     src={githubIcon}
                     alt="img"
@@ -320,7 +434,7 @@ const page = () => {
                     height={80} // Adjusted size for VS Code icon
                     className="object-contain w-full h-full"
                   />
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
