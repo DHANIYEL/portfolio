@@ -12,7 +12,6 @@
       cursor: default;
       
       h1 {
-        padding: 40px;
         justify-self: start;
         text-align: center; /* Center align text */
       }

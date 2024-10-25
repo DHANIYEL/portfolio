@@ -138,7 +138,7 @@ const Page = () => {
           <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full lg:px-32">
             {ProjectItems.map((item) => (
               <div
-                className="project_item_border border-y cursor-pointer py-10 flex justify-between items-center"
+                className="project_item_border border-y cursor-pointer py-7  flex justify-between items-center"
                 key={item.name}
                 onMouseEnter={() => {
                   setHoveredItem(item.imgSrc);
@@ -223,13 +223,13 @@ const Page = () => {
           </AnimatePresence>
 
           <motion.div
-            className="bottom-10 fixed z-[999]"
+            className="bottom-2 lg:bottom-5 fixed z-[999]"
             variants={arrowVariant}
             initial="hidden"
             animate="visible"
           >
             <motion.div
-              className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+              className="border-[#eee9c7] border-[2px] w-10 h-10 max-sm:w-8 max-sm:h-8  rounded-full flex justify-center items-center cursor-pointer arrow-icon"
               whileHover={{
                 scale: 1.2,
                 rotate: 360,
@@ -237,7 +237,7 @@ const Page = () => {
               }}
               onClick={handleNavigate}
             >
-              <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
+              <FaAngleDoubleDown className="w-5 h-5 z-50 max-sm:w-3 max-sm:h-3  text-white" />
             </motion.div>
           </motion.div>
         </div>
