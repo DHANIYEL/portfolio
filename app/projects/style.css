@@ -69,7 +69,7 @@
   opacity: 1; /* Show the overlay on hover */
 }
 .project_item_border:hover {
-  .color_black {
+  h1, .color_black {
     color: black;
   }
 }

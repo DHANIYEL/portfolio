@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react"; // Import useRef
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import { motion, AnimatePresence } from "framer-motion";
 import useMousePosition from "../utils/useMousePosition";
-import { gsap } from "gsap"; // Import GSAP
+import { gsap } from "gsap";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { BsArrowUpRight } from "react-icons/bs";
@@ -14,9 +14,9 @@ const Page = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isHolding, setIsHolding] = useState(false);
-  const [showPopup, setShowPopup] = useState(false); // State for popup message
-  const [popupShown, setPopupShown] = useState(false); // State to track if popup has been shown
-  const [holdTimer, setHoldTimer] = useState<NodeJS.Timeout | null>(null); // Timer for hold duration
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupShown, setPopupShown] = useState(false);
+  const [holdTimer, setHoldTimer] = useState<NodeJS.Timeout | null>(null);
   const size = isHovered ? 300 : 40;
 
   const ProjectItems = [
@@ -49,10 +49,9 @@ const Page = () => {
 
   const handleItemHoldRelease = (link: string) => {
     if (holdTimer) {
-      clearTimeout(holdTimer); // Clear timer if the item is released
+      clearTimeout(holdTimer);
     }
     if (isHolding) {
-      // Only animate if holding
       setIsHolding(false);
       gsap.to(".hovered-image", {
         opacity: 0,
@@ -66,15 +65,13 @@ const Page = () => {
 
   const showHoldPopup = () => {
     setShowPopup(true);
-    setPopupShown(true); // Set popup shown to true
-    // Hide the popup after 5 seconds
+    setPopupShown(true);
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);
   };
 
   useEffect(() => {
-    // GSAP animation for slide-up effect on component mount
     gsap.fromTo(
       ".project_main, .project_body",
       {
@@ -135,10 +132,10 @@ const Page = () => {
             <h1>PROJECTS</h1>
           </motion.div>
 
-          <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full ">
+          <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full">
             {ProjectItems.map((item) => (
-              <div
-                className="project_item_border border-y cursor-pointer py-7 flex justify-between items-center"
+              <motion.div
+                className="project_item_border hover:text-black border-y cursor-pointer py-7 flex justify-between items-center"
                 key={item.name}
                 onMouseEnter={() => {
                   setHoveredItem(item.imgSrc);
@@ -167,10 +164,19 @@ const Page = () => {
                     window.open(item.link, "_blank");
                   }
                 }}
+                initial={{ background: "transparent" }}
+                whileHover={{
+                  background:
+                    "linear-gradient(90deg, rgba(58, 86, 61, 1), rgba(114, 171, 120, 1), rgba(167, 251, 174, 1), rgba(227, 252, 99, 1))",
+                  transition: { duration: 0.3 },
+                  backgroundSize: "300% 300%",
+                  backgroundPosition: `${x}px ${y}px`, // Follow cursor position
+                }}
+                transition={{ duration: 0.5 }}
               >
-                <h2 className=" max-md:px-16 max-sm:px-6 px-32">{item.name}</h2>
-                <BsArrowUpRight className="mr-10 max-md:mr-4 color_black " />
-              </div>
+                <h2 className="max-md:px-16 max-sm:px-6 px-32">{item.name}</h2>
+                <BsArrowUpRight className="mr-10 max-md:mr-4" />
+              </motion.div>
             ))}
           </section>
 
@@ -181,9 +187,7 @@ const Page = () => {
                 src={hoveredItem}
                 alt="Project preview"
                 initial={{ opacity: 0, y: -50 }}
-                animate={
-                  isHolding ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }
-                }
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 50 }}
                 style={{
                   position: "fixed",
@@ -226,7 +230,7 @@ const Page = () => {
             animate="visible"
           >
             <motion.div
-              className="border-[#eee9c7] border-[2px] w-10 h-10 max-sm:w-8 max-sm:h-8  rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+              className="border-[#eee9c7] border-[2px] w-10 h-10 max-sm:w-8 max-sm:h-8 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
               whileHover={{
                 scale: 1.2,
                 rotate: 360,
@@ -234,7 +238,7 @@ const Page = () => {
               }}
               onClick={handleNavigate}
             >
-              <FaAngleDoubleDown className="w-5 h-5 z-50 max-sm:w-3 max-sm:h-3  text-white" />
+              <FaAngleDoubleDown className="w-5 h-5 z-50 max-sm:w-3 max-sm:h-3 text-white" />
             </motion.div>
           </motion.div>
         </div>
