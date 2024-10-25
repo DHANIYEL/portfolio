@@ -138,11 +138,10 @@ const Page = () => {
           <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full lg:px-32">
             {ProjectItems.map((item) => (
               <div
-                className="project_item_border border-y cursor-pointer py-7  flex justify-between items-center"
+                className="project_item_border border-y cursor-pointer py-7 flex justify-between items-center"
                 key={item.name}
                 onMouseEnter={() => {
                   setHoveredItem(item.imgSrc);
-                  // Show the popup message only if it hasn't been shown yet
                   if (!popupShown) {
                     showHoldPopup();
                   }
@@ -151,28 +150,26 @@ const Page = () => {
                   setHoveredItem(null);
                   setIsHolding(false);
                   if (holdTimer) {
-                    clearTimeout(holdTimer); // Clear timer on mouse leave
+                    clearTimeout(holdTimer);
                   }
                 }}
                 onMouseDown={() => {
                   setIsHolding(true);
-                  // Start the hold timer
                   const timer = setTimeout(() => {
-                    handleItemHoldRelease(item.link); // Call release function if holding for 2 seconds
+                    handleItemHoldRelease(item.link);
                   }, 200);
                   setHoldTimer(timer);
                 }}
                 onMouseUp={() => {
                   if (holdTimer) {
-                    clearTimeout(holdTimer); // Clear timer on mouse up
+                    clearTimeout(holdTimer);
                   } else {
-                    // Navigate immediately on click if not holding
                     window.open(item.link, "_blank");
                   }
                 }}
               >
                 <h2 className="ml-8 max-md:ml-4">{item.name}</h2>
-                <BsArrowUpRight className="mr-8 max-md:mr4" />
+                <BsArrowUpRight className="mr-8 max-md:mr-4" />
               </div>
             ))}
           </section>

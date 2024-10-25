@@ -42,4 +42,33 @@
     z-index: 1000; /* Make sure it's above other elements */
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
+  .project_item_border {
+    position: relative; /* Ensure positioning for the ::before element */
+    overflow: hidden; /* Hide overflow to keep the effect inside the border */
+  }
+  
+  .project_item_border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 1) 0%,  /* Black at the start */
+    rgba(58, 86, 61, 1) 25%,  /* #3A563D */
+    rgba(114, 171, 120, 1) 50%,  /* #72AB78 */
+    rgba(167, 251, 174, 1) 75%,  /* #A7FBAE */
+    rgba(227, 252, 99, 1) 100%  /* #E3FC63 */
+  ); /* Gradient using the specified colors */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in; /* Smooth transition for the effect */
+    z-index: -1; /* Position it behind the content */
+  }
+  
+  .project_item_border:hover::before {
+    opacity: 1; /* Show the overlay on hover */
+  }
+  
+  
   
