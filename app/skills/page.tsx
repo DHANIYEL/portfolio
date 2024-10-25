@@ -23,219 +23,209 @@ import vscodeIcon from "../../public/icon/vscode.svg";
 const page = () => {
   return (
     <div className=" h-screen w-screen ">
-      <div>
+      <div className="flex justify-center py-10">
         <h1 className="calcio text-9xl py-10 text-txt">SKILLS</h1>
       </div>
-      {/* main div */}
-      <div className="flex gap-6">
-        <div className="flex flex-col gap-3 justify-center items-center">
-          {/* grid layout 1st languages */}
-          <div className="flex gap-5 w-full max-w-screen-lg">
-            {/* grid section */}
-            <div className="grid grid-cols-2 gap-5 flex-1 w-full">
-              <div className="bg-[#0B1120] rounded-md overflow-hidden flex justify-center items-center p-6">
-                <Image
-                  src={viteIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="object-contain w-full h-full"
-                />
+      <div className="flex flex-col justify-center items-center h-screen">
+        {/* main div */}
+        <div className="flex gap-20">
+          <div className="flex flex-col gap-3 justify-center items-center">
+            {/* grid layout 1st languages */}
+            <div className="flex gap-5 w-full max-w-screen-lg">
+              {/* grid section */}
+              <div className="grid grid-cols-2 gap-5 flex-1 w-full">
+                <div className="bg-[#0B1120] rounded-md overflow-hidden flex justify-center items-center p-6">
+                  <Image
+                    src={viteIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="bg-[#2965F1] rounded-md overflow-hidden flex justify-center items-center p-6">
+                  <Image
+                    src={cssIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="bg-[#F16529] rounded-md overflow-hidden flex justify-center items-center p-6">
+                  <Image
+                    src={htmlIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="bg-[#0B1120] rounded-md overflow-hidden flex justify-center items-center p-6">
+                  <Image
+                    src={tailwindIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
               </div>
-              <div className="bg-[#2965F1] rounded-md overflow-hidden flex justify-center items-center p-6">
-                <Image
-                  src={cssIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="object-contain w-full h-full"
-                />
-              </div>
-              <div className="bg-[#F16529] rounded-md overflow-hidden flex justify-center items-center p-6">
-                <Image
-                  src={htmlIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="object-contain w-full h-full"
-                />
-              </div>
-              <div className="bg-[#0B1120] rounded-md overflow-hidden flex justify-center items-center p-6">
-                <Image
-                  src={tailwindIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="object-contain w-full h-full"
-                />
+
+              {/* JS big icon, slightly larger */}
+              <div className="bg-[#F7DF1E] rounded-md overflow-hidden flex justify-center items-end flex-1 px-5">
+                <div className="w-3/4 h-3/4 flex justify-center items-center">
+                  <Image
+                    src={jsIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    className="object-contain"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* JS big icon, slightly larger */}
-            <div className="bg-[#F7DF1E] rounded-md overflow-hidden flex justify-center items-end flex-1 px-5">
-              <div className="w-3/4 h-3/4 flex justify-center items-center">
-                <Image
-                  src={jsIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* second section  */}
-          <div className="flex w-full">
-            <div className="flex gap-3">
-              <div className="bg-[#23272F] rounded-md overflow-hidden flex justify-center items-center p-6">
-                <Image
-                  src={reactIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                {/* Smaller TS and SAAS icons */}
-                <div className="bg-[#017ACB] rounded-md overflow-hidden flex justify-center items-center p-4">
+            {/* second section  */}
+            <div className="flex w-full">
+              <div className="flex gap-3">
+                <div className="bg-[#23272F] rounded-md overflow-hidden flex justify-center items-center p-6">
                   <Image
-                    src={tsIcon}
+                    src={reactIcon}
                     alt="img"
                     layout="responsive"
-                    width={75} // Smaller size
-                    height={75} // Smaller size
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
-                <div className="bg-[#1E2235] rounded-md overflow-hidden flex justify-center items-center p-4">
-                  <Image
-                    src={saasIcon}
-                    alt="img"
-                    layout="responsive"
-                    width={75} // Smaller size
-                    height={75} // Smaller size
-                    className="object-contain"
-                  />
-                </div>
-                <div className="bg-[#000] rounded-md col-span-2  overflow-hidden flex justify-center items-center p-6">
-                  {/* Larger Next.js icon */}
-                  <Image
-                    src={nextIcon}
-                    alt="img"
-                    layout="responsive"
-                    width={125} // Larger size
-                    height={125} // Larger size
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="flex flex-col gap-3">
-                  <div className="bg-[#15161B] rounded-md overflow-hidden flex justify-center items-center p-6">
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Smaller TS and SAAS icons */}
+                  <div className="bg-[#017ACB] rounded-md overflow-hidden flex justify-center items-center p-4">
                     <Image
-                      src={nodeIcon}
+                      src={tsIcon}
                       alt="img"
                       layout="responsive"
-                      width={100}
-                      height={100}
-                      className="object-contain w-full h-full"
+                      width={75} // Smaller size
+                      height={75} // Smaller size
+                      className="object-contain"
                     />
                   </div>
-                  <div className="bg-[#1E2235] rounded-md overflow-hidden flex justify-center items-center p-6">
+                  <div className="bg-[#1E2235] rounded-md overflow-hidden flex justify-center items-center p-4">
                     <Image
-                      src={mongoIcon}
+                      src={saasIcon}
                       alt="img"
                       layout="responsive"
-                      width={100}
-                      height={100}
-                      className="object-contain w-full h-full"
+                      width={75} // Smaller size
+                      height={75} // Smaller size
+                      className="object-contain"
                     />
+                  </div>
+                  <div className="bg-[#000] rounded-md col-span-2  overflow-hidden flex justify-center items-center p-6">
+                    {/* Larger Next.js icon */}
+                    <Image
+                      src={nextIcon}
+                      alt="img"
+                      layout="responsive"
+                      width={125} // Larger size
+                      height={125} // Larger size
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex flex-col gap-3">
+                    <div className="bg-[#15161B] rounded-md overflow-hidden flex justify-center items-center p-6">
+                      <Image
+                        src={nodeIcon}
+                        alt="img"
+                        layout="responsive"
+                        width={100}
+                        height={100}
+                        className="object-contain w-full h-full"
+                      />
+                    </div>
+                    <div className="bg-[#1E2235] rounded-md overflow-hidden flex justify-center items-center p-6">
+                      <Image
+                        src={mongoIcon}
+                        alt="img"
+                        layout="responsive"
+                        width={100}
+                        height={100}
+                        className="object-contain w-full h-full"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex gap-3 justify-center items-center h-full">
-          <div className="flex flex-col gap-3 justify-start">
-            <div className="bg-[#0B1120] rounded-md w-full px-6 py-10">
-              <Image
-                src={figmaIcon}
-                alt="img"
-                layout="responsive"
-                width={80} // Adjusted size for Figma icon
-                height={80} // Adjusted size for Figma icon
-                className="object-contain"
-              />
-            </div>
-            <div className="flex gap-3">
-              <div className="bg-[#0B1120] rounded-md w-full h-full p-6">
+          <div className="flex gap-3 justify-center items-center h-full">
+            <div className="flex flex-col gap-3 justify-start">
+              <div className="bg-[#0B1120] rounded-md w-full px-6 py-10">
                 <Image
-                  src={framerIcon}
+                  src={figmaIcon}
                   alt="img"
                   layout="responsive"
-                  width={80} // Adjusted size for Framer icon
-                  height={80} // Adjusted size for Framer icon
-                  className="object-contain w-full h-full"
+                  width={80} // Adjusted size for Figma icon
+                  height={80} // Adjusted size for Figma icon
+                  className="object-contain"
                 />
               </div>
-              <div className="bg-[#0B1120] rounded-md flex justify-center w-full h-full p-6">
-                <Image
-                  src={gsapIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={80} // Adjusted size for GSAP icon
-                  height={80} // Adjusted size for GSAP icon
-                  className="object-contain w-full h-full"
-                />
+              <div className="flex gap-3">
+                <div className="bg-[#0B1120] rounded-md w-full h-full p-6">
+                  <Image
+                    src={framerIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={80} // Adjusted size for Framer icon
+                    height={80} // Adjusted size for Framer icon
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full h-full p-6">
+                  <Image
+                    src={gsapIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={80} // Adjusted size for GSAP icon
+                    height={80} // Adjusted size for GSAP icon
+                    className="object-contain w-full h-full"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3">
+              <div className="flex gap-3">
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-4">
+                  <Image
+                    src={wordpressIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={80} // Adjusted size for WordPress icon
+                    height={80} // Adjusted size for WordPress icon
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+                  <Image
+                    src={aeIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={80} // Adjusted size for AE icon
+                    height={80} // Adjusted size for AE icon
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+              </div>
               <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
                 <Image
-                  src={wordpressIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={80} // Adjusted size for WordPress icon
-                  height={80} // Adjusted size for WordPress icon
-                  className="object-contain w-full h-full"
-                />
-              </div>
-              <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
-                <Image
-                  src={aeIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={80} // Adjusted size for AE icon
-                  height={80} // Adjusted size for AE icon
-                  className="object-contain w-full h-full"
-                />
-              </div>
-            </div>
-            <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
-              <Image
-                src={vscodeIcon}
-                alt="img"
-                layout="responsive"
-                width={80} // Adjusted size for VS Code icon
-                height={80} // Adjusted size for VS Code icon
-                className="object-contain w-full h-full"
-              />
-            </div>
-            <div className="flex gap-3">
-              <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
-                <Image
-                  src={gitIcon}
+                  src={vscodeIcon}
                   alt="img"
                   layout="responsive"
                   width={80} // Adjusted size for VS Code icon
@@ -243,15 +233,27 @@ const page = () => {
                   className="object-contain w-full h-full"
                 />
               </div>
-              <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
-                <Image
-                  src={githubIcon}
-                  alt="img"
-                  layout="responsive"
-                  width={80} // Adjusted size for VS Code icon
-                  height={80} // Adjusted size for VS Code icon
-                  className="object-contain w-full h-full"
-                />
+              <div className="flex gap-3">
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+                  <Image
+                    src={gitIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={80} // Adjusted size for VS Code icon
+                    height={80} // Adjusted size for VS Code icon
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+                  <Image
+                    src={githubIcon}
+                    alt="img"
+                    layout="responsive"
+                    width={80} // Adjusted size for VS Code icon
+                    height={80} // Adjusted size for VS Code icon
+                    className="object-contain w-full h-full"
+                  />
+                </div>
               </div>
             </div>
           </div>
