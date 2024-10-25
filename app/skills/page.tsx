@@ -21,7 +21,7 @@ import gsapIcon from "../../public/icon/gsap-greensock.svg";
 import gitIcon from "../../public/icon/git.svg";
 import githubIcon from "../../public/icon/github.svg";
 import vscodeIcon from "../../public/icon/vscode.svg";
-import { AnimatePresence, easeIn, motion } from "framer-motion";
+import { AnimatePresence, delay, easeIn, motion } from "framer-motion";
 import useMousePosition from "../utils/useMousePosition";
 
 const page = () => {
@@ -36,7 +36,7 @@ const page = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.9 },
+      transition: { duration: 0.9, delay: 0.3 },
       ease: "easeIn",
     },
   };
@@ -46,7 +46,7 @@ const page = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.9 },
+      transition: { duration: 0.9, delay: 0.3 },
       ease: "easeIn",
     },
   };
@@ -363,7 +363,12 @@ const page = () => {
                 animate="visible"
                 className="flex gap-3"
               >
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-3.5">
+                <motion.div
+                  variants={rightIconVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-3.5"
+                >
                   <Image
                     src={wordpressIcon}
                     alt="img"
@@ -372,7 +377,7 @@ const page = () => {
                     height={80} // Adjusted size for WordPress icon
                     className="object-contain w-full h-full"
                   />
-                </div>
+                </motion.div>
                 <motion.div
                   variants={rightIconVariant}
                   initial="hidden"
