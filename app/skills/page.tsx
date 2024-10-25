@@ -29,7 +29,7 @@ const page = () => {
       <div className="flex flex-col justify-center items-center h-screen">
         {/* main div */}
         <div className="flex gap-20">
-          <div className="flex flex-col gap-3 justify-center items-center">
+          <div className="flex flex-col gap-6 justify-center items-center">
             {/* grid layout 1st languages */}
             <div className="flex gap-5 w-full max-w-screen-lg">
               {/* grid section */}
@@ -93,7 +93,7 @@ const page = () => {
 
             {/* second section  */}
             <div className="flex w-full">
-              <div className="flex gap-3">
+              <div className="flex gap-6">
                 <div className="bg-[#23272F] rounded-md overflow-hidden flex justify-center items-center p-6">
                   <Image
                     src={reactIcon}
@@ -104,7 +104,7 @@ const page = () => {
                     className="object-contain"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-6">
                   {/* Smaller TS and SAAS icons */}
                   <div className="bg-[#017ACB] rounded-md overflow-hidden flex justify-center items-center p-4">
                     <Image
@@ -139,7 +139,7 @@ const page = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-6">
                     <div className="bg-[#15161B] rounded-md overflow-hidden flex justify-center items-center p-6">
                       <Image
                         src={nodeIcon}
@@ -165,9 +165,9 @@ const page = () => {
               </div>
             </div>
           </div>
-          <div className="flex gap-3 justify-center items-center h-full">
-            <div className="flex flex-col gap-3 justify-start">
-              <div className="bg-[#0B1120] rounded-md w-full px-6 py-10">
+          <div className="flex gap-6 justify-center items-center h-full">
+            <div className="flex flex-col gap-6 justify-start">
+              <div className="bg-[#38393F] rounded-md w-full px-6 py-10">
                 <Image
                   src={figmaIcon}
                   alt="img"
@@ -177,7 +177,7 @@ const page = () => {
                   className="object-contain"
                 />
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-6">
                 <div className="bg-[#0B1120] rounded-md w-full h-full p-6">
                   <Image
                     src={framerIcon}
@@ -200,9 +200,9 @@ const page = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-3">
-              <div className="flex gap-3">
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-4">
+            <div className="flex flex-col gap-6">
+              <div className="flex gap-6">
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-3.5">
                   <Image
                     src={wordpressIcon}
                     alt="img"
@@ -212,7 +212,7 @@ const page = () => {
                     className="object-contain w-full h-full"
                   />
                 </div>
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+                <div className="bg-[#00005B] rounded-md flex justify-center w-full p-6">
                   <Image
                     src={aeIcon}
                     alt="img"
@@ -223,7 +223,7 @@ const page = () => {
                   />
                 </div>
               </div>
-              <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+              <div className="bg-[#0D1117] rounded-md flex justify-center w-full p-6">
                 <Image
                   src={vscodeIcon}
                   alt="img"
@@ -233,8 +233,8 @@ const page = () => {
                   className="object-contain w-full h-full"
                 />
               </div>
-              <div className="flex gap-3">
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+              <div className="flex gap-6">
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-5">
                   <Image
                     src={gitIcon}
                     alt="img"
@@ -244,7 +244,7 @@ const page = () => {
                     className="object-contain w-full h-full"
                   />
                 </div>
-                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-6">
+                <div className="bg-[#0B1120] rounded-md flex justify-center w-full p-5">
                   <Image
                     src={githubIcon}
                     alt="img"
