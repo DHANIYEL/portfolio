@@ -104,7 +104,7 @@ const Page = () => {
       duration: 0.7,
       ease: "power2.inOut",
       onComplete: () => {
-        router.push("/tech");
+        router.push("/skills");
       },
     });
   };
