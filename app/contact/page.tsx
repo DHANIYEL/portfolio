@@ -124,7 +124,7 @@ const ContactPage = () => {
               Please provide information for each section.{" "}
             </p>
 
-            <div className="text-[16px] z-10 mt-10 flex justify-center items-center overflow-y-auto max-lg:bottom-20 max-md:inline h-[calc(100vh-20rem)]">
+            <div className="text-[16px] z-10 mt-10 flex justify-center items-center max-md:overflow-y-auto lg:bottom-20 max-md:inline h-[calc(100vh-20rem)] xl:top-20 xl:right-10 absolute ">
               {" "}
               {/* Adjust height as needed */}
               <form
