@@ -94,7 +94,7 @@ const ContactPage = () => {
             <div className="text-[16px] z-10 mt-10 flex justify-center items-center absolute top-10 right-10 h-fit">
               <form
                 onSubmit={handleSubmit}
-                className="space-y-9 max-w-screen-lg mx-auto font-semibold bg-transparent"
+                className="space-y-9 max-w-screen-lg mx-auto font-semibold bg-white bg-opacity-0 shadow-md backdrop-blur-lg  rounded-lg p-6"
               >
                 <div className="flex gap-4">
                   <input
