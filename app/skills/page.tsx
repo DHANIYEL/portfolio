@@ -92,7 +92,7 @@ const page = () => {
     gsap.to(".fade-element", {
       opacity: 0,
       x: -50,
-      duration: 0.8,
+      duration: 0.5,
       stagger: 0.2,
       onComplete: () => {
         gsap.set(".fade-element", { display: "none" }); // Keeps elements hidden
@@ -102,7 +102,7 @@ const page = () => {
     gsap.to(".fade-element-right", {
       opacity: 0,
       x: 50,
-      duration: 0.8,
+      duration: 0.5,
       stagger: 0.2,
       onComplete: () => {
         gsap.set(".fade-element-right", { display: "none" }); // Keeps elements hidden
@@ -120,15 +120,12 @@ const page = () => {
     });
     gsap.to(".arrow-down", {
       opacity: 0,
-      y: -50,
-      duration: 0.8,
-      onComplete: () => {
-        gsap.set(".fade-element-right", { display: "none" }); // Keeps elements hidden
-      },
+      y: 100,
+      duration: 1.3,
     });
 
     // Delay the navigation to allow animations to complete
-    gsap.delayedCall(3.5, () => {
+    gsap.delayedCall(1.6, () => {
       router.push("/contact");
     });
   };
@@ -179,14 +176,14 @@ const page = () => {
             {/* grid layout 1st languages */}
             <div className="flex gap-5 w-full max-w-screen-lg">
               {/* grid section */}
-              <div className="grid grid-cols-2 gap-5 flex-1 w-full">
+              <motion.div className="grid grid-cols-2 gap-5 fade-element flex-1 w-full">
                 <motion.div
                   variants={leftIconVariant}
                   custom={1}
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120] rounded-md  flex fade-element justify-center items-center max-sm:p-2 p-6 "
+                  className="bg-[#0B1120] rounded-md  flex  justify-center items-center max-sm:p-2 p-6 "
                 >
                   <Image
                     src={viteIcon}
@@ -203,7 +200,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#2965F1] rounded-md   fade-element flex justify-center items-center max-sm:p-2 p-6"
+                  className="bg-[#2965F1] rounded-md    flex justify-center items-center max-sm:p-2 p-6"
                 >
                   <Image
                     src={cssIcon}
@@ -220,7 +217,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#F16529] rounded-md  flex fade-element justify-center items-center max-sm:p-2 p-6"
+                  className="bg-[#F16529] rounded-md  flex  justify-center items-center max-sm:p-2 p-6"
                 >
                   <Image
                     src={htmlIcon}
@@ -237,7 +234,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120] rounded-md fade-element flex justify-center items-center max-sm:p-2 p-6"
+                  className="bg-[#0B1120] rounded-md  flex justify-center items-center max-sm:p-2 p-6"
                 >
                   <Image
                     src={tailwindIcon}
@@ -248,7 +245,7 @@ const page = () => {
                     className="object-contain w-full h-full"
                   />
                 </motion.div>
-              </div>
+              </motion.div>
 
               {/* JS big icon, slightly larger */}
               <motion.div
@@ -257,7 +254,7 @@ const page = () => {
                 custom={3}
                 animate="visible"
                 exit={isAnimating ? "exit" : undefined}
-                className="bg-[#F7DF1E] rounded-md  fade-element flex justify-center items-end flex-1 px-5"
+                className="bg-[#F7DF1E] rounded-md fade-element flex justify-center items-end flex-1 px-5"
               >
                 <div className="w-3/4 h-3/4 flex justify-center  items-center">
                   <Image
@@ -281,7 +278,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#23272F] rounded-md fade-element flex justify-center items-center  max-sm:p-2 p-6"
+                  className="bg-[#23272F] rounded-md fade-element  flex justify-center items-center  max-sm:p-2 p-6"
                 >
                   <Image
                     src={reactIcon}
@@ -292,7 +289,7 @@ const page = () => {
                     className="object-contain"
                   />
                 </motion.div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3 fade-element">
                   {/* Smaller TS and SAAS icons */}
                   <motion.div
                     variants={leftIconVariant}
@@ -300,7 +297,7 @@ const page = () => {
                     initial="hidden"
                     animate="visible"
                     exit={isAnimating ? "exit" : undefined}
-                    className="bg-[#017ACB] rounded-md fade-element flex justify-center items-center  max-sm:p-2 p-4"
+                    className="bg-[#017ACB] rounded-md  flex justify-center items-center  max-sm:p-2 p-4"
                   >
                     <Image
                       src={tsIcon}
@@ -317,7 +314,7 @@ const page = () => {
                     initial="hidden"
                     animate="visible"
                     exit={isAnimating ? "exit" : undefined}
-                    className="bg-[#1E2235] rounded-md fade-element flex justify-center items-center  max-sm:p-2 p-4"
+                    className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-4"
                   >
                     <Image
                       src={saasIcon}
@@ -545,7 +542,7 @@ const page = () => {
         animate="visible"
       >
         <motion.div
-          className="border-[#eee9c7] bottom-5 fixed border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+          className="border-[#eee9c7] arrow-down bottom-5 fixed border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
           whileHover={{
             scale: 1.2, // Slight scaling effect on hover
             rotate: 360, // Rotate the icon on hover

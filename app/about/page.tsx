@@ -136,7 +136,7 @@ const About = () => {
             >
               {content.description}
               <br />
-              <p className="mt-32 porsche  text-black font-semibold">
+              <p className="mt-5   text-black font-semibold">
                 {" "}
                 I'am not interested in education system so i skip that.{" "}
               </p>
