@@ -4,17 +4,19 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import useMousePosition from "../utils/useMousePosition";
 import "./style.css";
+import emailjs from "emailjs-com";
 
 const ContactPage = () => {
   const [hovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = hovered ? 300 : 40;
 
+  const [message, setMessage] = useState(""); // Add this line
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedSource, setSelectedSource] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [helpWith, setHelpWith] = useState("select");
+  const [helpWith, setHelpWith] = useState("Not Selected");
   const [budget, setBudget] = useState("5-10k");
 
   const roles = [
@@ -33,19 +35,50 @@ const ContactPage = () => {
     "Other",
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
 
-    const formData = {
-      name,
-      email,
-      role: selectedRole,
-      helpWith,
-      source: selectedSource,
-      budget,
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Prepare template parameters based on your form fields
+    const templateParams = {
+      to_name: "Recipient Name", // Replace with the actual recipient name
+      from_name: name, // Your name from the form
+      email_id: email, // Your email from the form
+      message: message, // The message content from your form
+      role: selectedRole, // Added selected role
+      help_with: helpWith, // Added what help is needed
+      source: selectedSource, // Added source of referral
+      budget: budget, // Added budget
     };
 
-    console.log(formData);
+    // Send the email using EmailJS
+    emailjs
+      .send(
+        "service_oocyn6d", // Your Service ID
+        "template_7ywvwbh", // Your Template ID
+        templateParams, // Your parameters with form data
+        "Ueg7o-QUEuKvqMRqr" // Your User ID
+      )
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Message sent successfully!"); // Notify user of success
+
+        // Clear form fields
+        setName("");
+        setEmail("");
+        setSelectedRole("");
+        setHelpWith("Not Selected");
+        setSelectedSource("");
+        setBudget("5-10k");
+        setMessage("");
+      })
+      .catch((error) => {
+        console.log("FAILED...", error);
+        alert("Failed to send message. Please try again."); // Notify user of failure
+      });
+
+    console.log(templateParams); // Log the parameters for debugging
   };
 
   return (
@@ -202,6 +235,15 @@ const ContactPage = () => {
                       <option>50k+</option>
                     </select>
                   </label>
+                  <div>
+                    <textarea
+                      placeholder="Your Message"
+                      required
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="w-full px-4 py-2 border border-txt rounded-md focus:outline-none bg-transparent"
+                    />
+                  </div>
                 </div>
 
                 <button
