@@ -14,7 +14,7 @@ const About = () => {
   const [section, setSection] = useState("about"); // Track the current section
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
-  const size = isHovered ? 200 : 40;
+  const size = isHovered ? 300 : 40;
 
   // Framer Motion variants for fade and slide up animation
   const fadeSlideVariant = {
@@ -135,6 +135,11 @@ const About = () => {
               className="font-light font-sans text-4xl leading-relaxed max-w-screen-xl text-black text-center px-5"
             >
               {content.description}
+              <br />
+              <p className="mt-32 porsche  text-black font-semibold">
+                {" "}
+                I'am not interested in education system so i skip that.{" "}
+              </p>
             </motion.p>
           </AnimatePresence>
         </motion.div>
