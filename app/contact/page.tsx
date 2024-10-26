@@ -82,7 +82,7 @@ const ContactPage = () => {
   };
 
   return (
-    <section className="relative w-screen h-screen ">
+    <section className="relative w-screen h-screen overflow-y-auto">
       <div className="contact_main text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7]">
         <motion.div
           className="contact_mask"
@@ -124,10 +124,12 @@ const ContactPage = () => {
               Please provide information for each section.{" "}
             </p>
 
-            <div className="text-[16px] z-10 mt-10 flex justify-center items-center absolute top-10 right-10 h-fit">
+            <div className="text-[16px] z-10 mt-10 flex justify-center items-center overflow-y-auto max-lg:bottom-20 max-md:inline h-[calc(100vh-20rem)]">
+              {" "}
+              {/* Adjust height as needed */}
               <form
                 onSubmit={handleSubmit}
-                className="space-y-9 max-w-screen-lg mx-auto font-semibold bg-white bg-opacity-0 shadow-md backdrop-blur-lg  rounded-lg p-6"
+                className="space-y-9 max-w-screen-lg mx-auto font-semibold bg-white bg-opacity-0 shadow-md backdrop-blur-lg rounded-lg p-6"
               >
                 <div className="flex gap-4">
                   <input
@@ -148,7 +150,8 @@ const ContactPage = () => {
                   />
                 </div>
 
-                <div className="space-y-5 ">
+                <div className="space-y-5">
+                  {/* Role Selection */}
                   <label className="block font-bold">
                     <p className="mb-3">What is your role?*</p>
                     <div className="flex gap-5 justify-center items-center font-semibold">
@@ -168,6 +171,7 @@ const ContactPage = () => {
                     </div>
                   </label>
 
+                  {/* Help With Selection */}
                   <label className="block font-bold">
                     <p className="mb-3">What can we help you with?*</p>
                     <select
@@ -194,6 +198,7 @@ const ContactPage = () => {
                     </select>
                   </label>
 
+                  {/* Source Selection */}
                   <label className="block font-bold">
                     <p className="mb-3">How did you find us?*</p>
                     <div className="flex gap-5 justify-center items-center font-semibold">
@@ -213,6 +218,7 @@ const ContactPage = () => {
                     </div>
                   </label>
 
+                  {/* Budget Selection */}
                   <label className="block font-bold">
                     <p className="mb-3">Project Budget*</p>
                     <select
@@ -235,6 +241,8 @@ const ContactPage = () => {
                       <option>50k+</option>
                     </select>
                   </label>
+
+                  {/* Message Area */}
                   <div>
                     <textarea
                       placeholder="Your Message"
@@ -246,6 +254,7 @@ const ContactPage = () => {
                   </div>
                 </div>
 
+                {/* Send Button */}
                 <motion.button
                   type="submit"
                   className="relative w-full py-3 text-txt border border-txt rounded-md overflow-hidden"
@@ -256,7 +265,7 @@ const ContactPage = () => {
                   }}
                   style={{
                     backgroundImage:
-                      "linear-gradient(135deg, transparent 0%, #EEE9C7 50%, transparent 100%)", // Replace #00FF00 with your desired green color
+                      "linear-gradient(135deg, transparent 0%, #EEE9C7 50%, transparent 100%)",
                     backgroundSize: "200% 200%",
                   }}
                 >
