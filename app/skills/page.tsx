@@ -78,54 +78,48 @@ const page = () => {
     }, 5000);
   };
 
-  const arrowVariant = {
-    hidden: { y: 50, opacity: 0 },
+  const arrowFadeUpVariant = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: { delay: 1.5, duration: 1, ease: "easeOut" },
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut",
+      },
     },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
   };
   const router = useRouter();
 
   const handleNavigate = () => {
-    gsap.to(".fade-element", {
+    setIsAnimating(true); // Stop Framer animations
+    // GSAP animations for left and right elements
+    gsap.to(".fade-element, .fade-element-right", {
       opacity: 0,
-      x: -50,
+      x: (i, el) => (el.classList.contains("fade-element") ? -50 : 50),
       duration: 0.5,
       stagger: 0.2,
-      onComplete: () => {
-        gsap.set(".fade-element", { display: "none" }); // Keeps elements hidden
-      },
+      onComplete: () =>
+        gsap.set(".fade-element, .fade-element-right", { display: "none" }),
     });
 
-    gsap.to(".fade-element-right", {
-      opacity: 0,
-      x: 50,
-      duration: 0.5,
-      stagger: 0.2,
-      onComplete: () => {
-        gsap.set(".fade-element-right", { display: "none" }); // Keeps elements hidden
-      },
-    });
-
-    // GSAP Animation for the title
     gsap.to(".calcio", {
       opacity: 0,
       y: -30,
       duration: 0.8,
-      onComplete: () => {
-        gsap.set(".calcio", { display: "none" }); // Keeps title hidden
-      },
+      onComplete: () => gsap.set(".calcio", { display: "none" }),
     });
+
     gsap.to(".arrow-down", {
       opacity: 0,
       y: 100,
-      duration: 1.3,
+      duration: 1,
+      ease: "power2.out",
+      onComplete: () => gsap.set(".arrow-down", { display: "none" }),
     });
 
-    // Delay the navigation to allow animations to complete
-    gsap.delayedCall(1.6, () => {
+    gsap.delayedCall(1, () => {
       router.push("/contact");
     });
   };
@@ -172,11 +166,11 @@ const page = () => {
       <div className=" flex flex-col justify-center p-10 mb-10 max-sm:p-2 items-center">
         {/* main div */}
         <div className=" flex gap-20 max-md:flex-col ">
-          <div className="first-icon flex flex-col gap-3 justify-center items-center">
+          <div className="first-icon flex flex-col gap-3 justify-center items-center fade-element">
             {/* grid layout 1st languages */}
             <div className="flex gap-5 w-full max-w-screen-lg">
               {/* grid section */}
-              <motion.div className="grid grid-cols-2 gap-5 fade-element flex-1 w-full">
+              <motion.div className="grid grid-cols-2 gap-5  flex-1 w-full">
                 <motion.div
                   variants={leftIconVariant}
                   custom={1}
@@ -254,7 +248,7 @@ const page = () => {
                 custom={3}
                 animate="visible"
                 exit={isAnimating ? "exit" : undefined}
-                className="bg-[#F7DF1E] rounded-md fade-element flex justify-center items-end flex-1 px-5"
+                className="bg-[#F7DF1E] rounded-md  flex justify-center items-end flex-1 px-5"
               >
                 <div className="w-3/4 h-3/4 flex justify-center  items-center">
                   <Image
@@ -278,7 +272,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#23272F] rounded-md fade-element  flex justify-center items-center  max-sm:p-2 p-6"
+                  className="bg-[#23272F] rounded-md   flex justify-center items-center  max-sm:p-2 p-6"
                 >
                   <Image
                     src={reactIcon}
@@ -289,7 +283,7 @@ const page = () => {
                     className="object-contain"
                   />
                 </motion.div>
-                <div className="grid grid-cols-2 gap-3 fade-element">
+                <div className="grid grid-cols-2 gap-3 ">
                   {/* Smaller TS and SAAS icons */}
                   <motion.div
                     variants={leftIconVariant}
@@ -331,7 +325,7 @@ const page = () => {
                     initial="hidden"
                     animate="visible"
                     exit={isAnimating ? "exit" : undefined}
-                    className="bg-[#000] rounded-md col-span-2 fade-element  flex justify-center items-center  max-sm:p-2 p-6"
+                    className="bg-[#000] rounded-md col-span-2   flex justify-center items-center  max-sm:p-2 p-6"
                   >
                     {/* Larger Next.js icon */}
                     <Image
@@ -352,7 +346,7 @@ const page = () => {
                       initial="hidden"
                       animate="visible"
                       exit={isAnimating ? "exit" : undefined}
-                      className="bg-[#15161B] rounded-md fade-element max-sm:p-2  flex justify-center items-center p-6"
+                      className="bg-[#15161B] rounded-md  max-sm:p-2  flex justify-center items-center p-6"
                     >
                       <Image
                         src={nodeIcon}
@@ -369,7 +363,7 @@ const page = () => {
                       initial="hidden"
                       animate="visible"
                       exit={isAnimating ? "exit" : undefined}
-                      className="bg-[#1E2235] rounded-md fade-element flex justify-center items-center  max-sm:p-2 p-6"
+                      className="bg-[#1E2235] rounded-md  flex justify-center items-center  max-sm:p-2 p-6"
                     >
                       <Image
                         src={mongoIcon}
@@ -385,7 +379,7 @@ const page = () => {
               </div>
             </div>
           </div>
-          <div className="second-icon flex gap-3 justify-center items-center h-full">
+          <div className="second-icon flex gap-3 justify-center items-center h-full fade-element-right">
             <div className="flex flex-col gap-3 justify-start">
               <motion.div
                 variants={rightIconVariant}
@@ -393,7 +387,7 @@ const page = () => {
                 initial="hidden"
                 animate="visible"
                 exit={isAnimating ? "exit" : undefined}
-                className="bg-[#38393F] fade-element-right rounded-md w-full px-6  py-10"
+                className="bg-[#38393F] rounded-md w-full px-6  py-10"
               >
                 <Image
                   src={figmaIcon}
@@ -411,7 +405,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120] fade-element-right rounded-md w-full h-full   p-6"
+                  className="bg-[#0B1120] rounded-md w-full h-full   p-6"
                 >
                   <Image
                     src={framerIcon}
@@ -428,7 +422,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120] fade-element-right rounded-md flex justify-center w-full   h-full p-6"
+                  className="bg-[#0B1120] rounded-md flex justify-center w-full   h-full p-6"
                 >
                   <Image
                     src={gsapIcon}
@@ -449,7 +443,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120] fade-element-right rounded-md flex justify-center w-full  max-sm:p-2 p-3.5"
+                  className="bg-[#0B1120] rounded-md flex justify-center w-full  max-sm:p-2 p-3.5"
                 >
                   <Image
                     src={wordpressIcon}
@@ -466,7 +460,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#00005B] fade-element-right rounded-md flex justify-center w-full  max-sm:p-2 p-6"
+                  className="bg-[#00005B] rounded-md flex justify-center w-full  max-sm:p-2 p-6"
                 >
                   <Image
                     src={aeIcon}
@@ -484,7 +478,7 @@ const page = () => {
                 initial="hidden"
                 animate="visible"
                 exit={isAnimating ? "exit" : undefined}
-                className="bg-[#0D1117]  rounded-md fade-element-right flex justify-center w-full  max-sm:p-2 p-6"
+                className="bg-[#0D1117]  rounded-md flex justify-center w-full  max-sm:p-2 p-6"
               >
                 <Image
                   src={vscodeIcon}
@@ -502,7 +496,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120]  rounded-md flex fade-element-right justify-center w-full  max-sm:p-2 p-5"
+                  className="bg-[#0B1120]  rounded-md flex justify-center w-full  max-sm:p-2 p-5"
                 >
                   <Image
                     src={gitIcon}
@@ -519,7 +513,7 @@ const page = () => {
                   initial="hidden"
                   animate="visible"
                   exit={isAnimating ? "exit" : undefined}
-                  className="bg-[#0B1120]  rounded-md flex fade-element-right justify-center w-full  max-sm:p-2 p-5"
+                  className="bg-[#0B1120]  rounded-md flex justify-center w-full  max-sm:p-2 p-5"
                 >
                   <Image
                     src={githubIcon}
@@ -536,13 +530,14 @@ const page = () => {
         </div>
       </div>
       <motion.div
-        className="arrow-down  flex justify-center z-[999]"
-        variants={arrowVariant}
+        className=" flex justify-center z-[999]"
+        variants={arrowFadeUpVariant}
         initial="hidden"
         animate="visible"
+        exit="exit"
       >
         <motion.div
-          className="border-[#eee9c7] arrow-down bottom-5 fixed border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+          className="border-[#eee9c7] arrow-down absolute bottom-5  border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
           whileHover={{
             scale: 1.2, // Slight scaling effect on hover
             rotate: 360, // Rotate the icon on hover
