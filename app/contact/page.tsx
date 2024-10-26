@@ -246,12 +246,22 @@ const ContactPage = () => {
                   </div>
                 </div>
 
-                <button
+                <motion.button
                   type="submit"
-                  className="w-full py-3 text-txt border border-txt rounded-md"
+                  className="relative w-full py-3 text-txt border border-txt rounded-md overflow-hidden"
+                  initial={{ backgroundPosition: "100% 0%" }}
+                  whileHover={{
+                    backgroundPosition: "0% 100%",
+                    transition: { duration: 0.8 },
+                  }}
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(135deg, transparent 0%, #EEE9C7 50%, transparent 100%)", // Replace #00FF00 with your desired green color
+                    backgroundSize: "200% 200%",
+                  }}
                 >
                   Send
-                </button>
+                </motion.button>
               </form>
             </div>
           </div>
