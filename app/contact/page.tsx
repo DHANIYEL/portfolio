@@ -190,7 +190,7 @@ const ContactPage = () => {
       duration: 0.7,
       ease: "power2.inOut",
       onComplete: () => {
-        router.push("/end"); // Navigate to the About page after animation
+        router.push("/"); // Navigate to the About page after animation
       },
     });
   };
@@ -228,7 +228,7 @@ const ContactPage = () => {
           <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="font-sans text-2xl font-light p-10 flex flex-col gap-5"
+            className="font-sans text-2xl font-light p-10 flex flex-col gap-5 w-fit"
           >
             <h3 className="text-4xl font-semibold">
               Start your project with ME.
