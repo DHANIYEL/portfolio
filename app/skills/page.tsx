@@ -110,12 +110,11 @@ const page = () => {
       duration: 0.8,
       onComplete: () => gsap.set(".calcio", { display: "none" }),
     });
-
     gsap.to(".arrow-down", {
       opacity: 0,
-      y: 100,
-      duration: 1,
-      ease: "power2.out",
+      y: 50, // Slide the content up a bit
+      duration: 0.7,
+      ease: "power2.inOut",
       onComplete: () => gsap.set(".arrow-down", { display: "none" }),
     });
 

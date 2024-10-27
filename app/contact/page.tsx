@@ -1,10 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useMousePosition from "../utils/useMousePosition";
 import "./style.css";
-import emailjs from "emailjs-com";
+// import emailjs from "emailjs-com";
+import { FaAngleDoubleDown } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { gsap } from "gsap";
+import ModalBox from "../components/ModalBox";
 
 const ContactPage = () => {
   const [hovered, setIsHovered] = useState(false);
@@ -18,6 +22,13 @@ const ContactPage = () => {
   const [email, setEmail] = useState("");
   const [helpWith, setHelpWith] = useState("Not Selected");
   const [budget, setBudget] = useState("5-10k");
+
+  const [showModal, setShowModal] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [messageError, setMessageError] = useState(false);
 
   const roles = [
     "Owner/Founder",
@@ -34,53 +45,116 @@ const ContactPage = () => {
     "Client Referral",
     "Other",
   ];
-
-  emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission
-
-    // Prepare template parameters based on your form fields
-    const templateParams = {
-      to_name: "Recipient Name", // Replace with the actual recipient name
-      from_name: name, // Your name from the form
-      email_id: email, // Your email from the form
-      message: message, // The message content from your form
-      role: selectedRole, // Added selected role
-      help_with: helpWith, // Added what help is needed
-      source: selectedSource, // Added source of referral
-      budget: budget, // Added budget
-    };
-
-    // Send the email using EmailJS
-    emailjs
-      .send(
-        "service_oocyn6d", // Your Service ID
-        "template_7ywvwbh", // Your Template ID
-        templateParams, // Your parameters with form data
-        "Ueg7o-QUEuKvqMRqr" // Your User ID
-      )
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Message sent successfully!"); // Notify user of success
-
-        // Clear form fields
-        setName("");
-        setEmail("");
-        setSelectedRole("");
-        setHelpWith("Not Selected");
-        setSelectedSource("");
-        setBudget("5-10k");
-        setMessage("");
-      })
-      .catch((error) => {
-        console.log("FAILED...", error);
-        alert("Failed to send message. Please try again."); // Notify user of failure
-      });
-
-    console.log(templateParams); // Log the parameters for debugging
+  const arrowVariant = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { delay: 1.5, duration: 1, ease: "easeOut" },
+    },
   };
 
+  // emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
+
+  useEffect(() => {
+    if (showModal) {
+      const timer = setTimeout(() => setShowModal(false), 5000);
+      return () => clearTimeout(timer); // Cleanup if the component is unmounted
+    }
+  }, [showModal]);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const templateParams = {
+  //     to_name: "Recipient Name",
+  //     from_name: name,
+  //     email_id: email,
+  //     message: message,
+  //     role: selectedRole,
+  //     help_with: helpWith,
+  //     source: selectedSource,
+  //     budget: budget,
+  //   };
+
+  //   emailjs
+  //     .send(
+  //       "service_oocyn6d",
+  //       "template_7ywvwbh",
+  //       templateParams,
+  //       "Ueg7o-QUEuKvqMRqr"
+  //     )
+  //     .then((response) => {
+  //       console.log("SUCCESS!", response.status, response.text);
+  //       setIsSuccess(true);
+  //       setShowModal(true);
+
+  //       setName("");
+  //       setEmail("");
+  //       setSelectedRole("");
+  //       setHelpWith("Not Selected");
+  //       setSelectedSource("");
+  //       setBudget("5-10k");
+  //       setMessage("");
+  //     })
+  //     .catch((error) => {
+  //       console.log("FAILED...", error);
+  //       setIsSuccess(false);
+  //       setShowModal(true);
+  //     });
+  // console.log(templateParams);
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setNameError(!name);
+    setEmailError(!email);
+    setMessageError(!message);
+
+    if (!name || !email || !message) {
+      // Prevent modal from showing if there are errors
+      return;
+    }
+
+    const templateParams = {
+      to_name: "Recipient Name",
+      from_name: name,
+      email_id: email,
+      message: message,
+      role: selectedRole,
+      help_with: helpWith,
+      source: selectedSource,
+      budget: budget,
+    };
+
+    console.log("Form Data:", templateParams);
+    setIsSuccess(true);
+    setShowModal(true);
+
+    // Reset the form fields
+    setName("");
+    setEmail("");
+    setSelectedRole("");
+    setHelpWith("Not Selected");
+    setSelectedSource("");
+    setBudget("5-10k");
+    setMessage("");
+  };
+
+  const router = useRouter();
+  const handleNavigate = () => {
+    // Create a smooth page transition using GSAP
+    gsap.to(".contact_main, .contact_body", {
+      opacity: 0,
+      y: -50, // Slide the content up a bit
+      duration: 0.7,
+      ease: "power2.inOut",
+      onComplete: () => {
+        router.push("/end"); // Navigate to the About page after animation
+      },
+    });
+  };
   return (
     <section className="relative w-screen h-screen overflow-y-auto">
       <div className="contact_main text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7]">
@@ -135,18 +209,20 @@ const ContactPage = () => {
                   <input
                     type="text"
                     placeholder="NAME"
-                    required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-2 border border-txt rounded-md focus:outline-none bg-transparent"
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none bg-transparent ${
+                      nameError ? "border-red-500" : "border-txt"
+                    }`}
                   />
                   <input
                     type="email"
                     placeholder="EMAIL"
-                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2 border border-txt rounded-md focus:outline-none bg-transparent"
+                    className={`w-full px-4 py-2 border rounded-md focus:outline-none bg-transparent ${
+                      emailError ? "border-red-500" : "border-txt"
+                    }`}
                   />
                 </div>
 
@@ -158,10 +234,10 @@ const ContactPage = () => {
                       {roles.map((role) => (
                         <p
                           key={role}
-                          className={`border-[2px] border-txt px-3 py-2 rounded-xl cursor-pointer ${
+                          className={`border-[2px] border-txt px-3 py-2 rounded-xl cursor-pointer transition-all duration-300 ${
                             selectedRole === role
                               ? "bg-txt text-black"
-                              : "text-txt"
+                              : "bg-transparent text-txt"
                           }`}
                           onClick={() => setSelectedRole(role)}
                         >
@@ -179,7 +255,6 @@ const ContactPage = () => {
                       onChange={(e) => setHelpWith(e.target.value)}
                       className="w-full px-4 py-2 border border-txt rounded-md focus:outline-none bg-transparent text-txt appearance-none"
                       style={{
-                        backgroundImage: "url('/path/to/your/icon.svg')",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "right 10px center",
                         backgroundSize: "15px",
@@ -205,10 +280,10 @@ const ContactPage = () => {
                       {sources.map((source) => (
                         <p
                           key={source}
-                          className={`border-[2px] border-txt px-3 py-2 rounded-xl cursor-pointer ${
+                          className={`border-[2px] border-txt px-3 py-2 rounded-xl cursor-pointer transition-all duration-300 ${
                             selectedSource === source
                               ? "bg-txt text-black"
-                              : "text-txt"
+                              : "bg-transparent text-txt"
                           }`}
                           onClick={() => setSelectedSource(source)}
                         >
@@ -246,10 +321,11 @@ const ContactPage = () => {
                   <div>
                     <textarea
                       placeholder="Your Message"
-                      required
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-4 py-2 border border-txt rounded-md focus:outline-none bg-transparent"
+                      className={`w-full px-4 py-2 border ${
+                        messageError ? "border-red-500" : "border-txt"
+                      } rounded-md focus:outline-none bg-transparent`}
                     />
                   </div>
                 </div>
@@ -271,10 +347,29 @@ const ContactPage = () => {
                 >
                   Send
                 </motion.button>
+                <ModalBox show={showModal} isSuccess={isSuccess} />
               </form>
             </div>
           </div>
         </div>
+        <motion.div
+          className=" bottom-10 fixed z-[999]"
+          variants={arrowVariant}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div
+            className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+            whileHover={{
+              scale: 1.2, // Slight scaling effect on hover
+              rotate: 360, // Rotate the icon on hover
+              transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
+            }}
+            onClick={handleNavigate} // Trigger navigation when clicked
+          >
+            <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
