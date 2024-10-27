@@ -237,20 +237,23 @@ const ContactPage = () => {
               Providing these details up front helps us manage requests better.
               Please provide information for each section.
             </p>
-            <div className="text-5xl">
+            <div className="text-5xl text-black">
               <div className=" flex gap-5 ">
                 <a href="https://www.linkedin.com/in/dhaniyel-darvesh-256987280/">
                   <FaLinkedin
-                    className="cursor-pointer"
+                    className="cursor-pointer hover:text-txt hover:scale-110 transition-transform duration-300"
                     onClick={iconNavigate}
                   />
                 </a>
                 <a href="https://github.com/DHANIYEL">
-                  <FaGithub className="cursor-pointer" onClick={iconNavigate} />
+                  <FaGithub
+                    className="cursor-pointer hover:text-txt hover:scale-110 transition-transform duration-300"
+                    onClick={iconNavigate}
+                  />
                 </a>
                 <a href="https://www.instagram.com/dhaniiiyll/?hl=en">
                   <FaInstagram
-                    className="cursor-pointer"
+                    className="cursor-pointer hover:text-txt hover:scale-110   transition-transform duration-300 "
                     onClick={iconNavigate}
                   />
                 </a>
