@@ -53,14 +53,19 @@ const ContactPage = () => {
       transition: { delay: 1.5, duration: 1, ease: "easeOut" },
     },
   };
-  useEffect(() => {
-    // Activate animation when the component mounts
-    gsap.fromTo(
-      ".contact_main, .contact_body", // Ensure you have the correct selector with a dot for classes
-      { opacity: 0, y: 50 }, // Starting state
-      { opacity: 1, y: 0, duration: 1, ease: "power2.Out" } // Ending state
-    );
-  }, []);
+
+  const fadeSlideVariant = {
+    hidden: { opacity: 0, y: 20 }, // Start off-screen slightly down
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5, // Adjust duration for the fade effect
+        ease: "easeInOut", // Smooth easing function
+      },
+    },
+    exit: { opacity: 0, y: 20, transition: { duration: 0.3 } }, // Exit animation for smooth fade-out
+  };
 
   emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
 
@@ -170,7 +175,6 @@ const ContactPage = () => {
   }, [showModal]);
 
   const router = useRouter();
-
   const handleNavigate = () => {
     // Create a smooth page transition using GSAP
     gsap.to(".contact_main, .contact_body", {
@@ -185,7 +189,12 @@ const ContactPage = () => {
   };
   return (
     <section className="relative w-screen h-screen overflow-y-auto">
-      <div className="contact_main text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7]">
+      <motion.div
+        variants={fadeSlideVariant}
+        initial="hidden"
+        animate="visible"
+        className="contact_main text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7]"
+      >
         <motion.div
           className="contact_mask"
           animate={{
@@ -398,7 +407,7 @@ const ContactPage = () => {
             <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
