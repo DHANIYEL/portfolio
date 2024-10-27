@@ -5,10 +5,17 @@ import React, { useEffect, useState } from "react";
 import useMousePosition from "../utils/useMousePosition";
 import "./style.css";
 import emailjs from "emailjs-com";
-import { FaAngleDoubleDown } from "react-icons/fa";
+import {
+  FaAngleDoubleDown,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import ModalBox from "../components/ModalBox";
+import gitIcon from "../../public//icon/github.svg";
+import Image from "next/image";
 
 const ContactPage = () => {
   const [hovered, setIsHovered] = useState(false);
@@ -187,6 +194,15 @@ const ContactPage = () => {
       },
     });
   };
+  const iconNavigate = () => {
+    // Create a smooth page transition using GSAP
+    gsap.to(".contact_main, .contact_body", {
+      opacity: 0,
+      y: -50, // Slide the content up a bit
+      duration: 0.4,
+      ease: "power2.inOut",
+    });
+  };
   return (
     <section className="relative w-screen h-screen overflow-y-auto">
       <motion.div
@@ -221,6 +237,25 @@ const ContactPage = () => {
               Providing these details up front helps us manage requests better.
               Please provide information for each section.
             </p>
+            <div className="text-5xl">
+              <div className=" flex gap-5 ">
+                <a href="https://www.linkedin.com/in/dhaniyel-darvesh-256987280/">
+                  <FaLinkedin
+                    className="cursor-pointer"
+                    onClick={iconNavigate}
+                  />
+                </a>
+                <a href="https://github.com/DHANIYEL">
+                  <FaGithub className="cursor-pointer" onClick={iconNavigate} />
+                </a>
+                <a href="https://www.instagram.com/dhaniiiyll/?hl=en">
+                  <FaInstagram
+                    className="cursor-pointer"
+                    onClick={iconNavigate}
+                  />
+                </a>
+              </div>
+            </div>
           </div>
         </motion.div>
 
