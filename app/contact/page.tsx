@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import useMousePosition from "../utils/useMousePosition";
 import "./style.css";
-// import emailjs from "emailjs-com";
+import emailjs from "emailjs-com";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
@@ -54,66 +54,22 @@ const ContactPage = () => {
     },
   };
 
-  // emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
-
-  useEffect(() => {
-    if (showModal) {
-      const timer = setTimeout(() => setShowModal(false), 5000);
-      return () => clearTimeout(timer); // Cleanup if the component is unmounted
-    }
-  }, [showModal]);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const templateParams = {
-  //     to_name: "Recipient Name",
-  //     from_name: name,
-  //     email_id: email,
-  //     message: message,
-  //     role: selectedRole,
-  //     help_with: helpWith,
-  //     source: selectedSource,
-  //     budget: budget,
-  //   };
-
-  //   emailjs
-  //     .send(
-  //       "service_oocyn6d",
-  //       "template_7ywvwbh",
-  //       templateParams,
-  //       "Ueg7o-QUEuKvqMRqr"
-  //     )
-  //     .then((response) => {
-  //       console.log("SUCCESS!", response.status, response.text);
-  //       setIsSuccess(true);
-  //       setShowModal(true);
-
-  //       setName("");
-  //       setEmail("");
-  //       setSelectedRole("");
-  //       setHelpWith("Not Selected");
-  //       setSelectedSource("");
-  //       setBudget("5-10k");
-  //       setMessage("");
-  //     })
-  //     .catch((error) => {
-  //       console.log("FAILED...", error);
-  //       setIsSuccess(false);
-  //       setShowModal(true);
-  //     });
-  // console.log(templateParams);
-  // };
+  emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setNameError(!name);
-    setEmailError(!email);
-    setMessageError(!message);
+    // Check for input errors and set error states
+    const hasNameError = !name;
+    const hasEmailError = !email;
+    const hasMessageError = !message;
 
-    if (!name || !email || !message) {
-      // Prevent modal from showing if there are errors
+    setNameError(hasNameError);
+    setEmailError(hasEmailError);
+    setMessageError(hasMessageError);
+
+    // Prevent modal from showing if any required fields are missing
+    if (hasNameError || hasEmailError || hasMessageError) {
       return;
     }
 
@@ -128,19 +84,82 @@ const ContactPage = () => {
       budget: budget,
     };
 
-    console.log("Form Data:", templateParams);
-    setIsSuccess(true);
-    setShowModal(true);
+    emailjs
+      .send(
+        "service_oocyn6d",
+        "template_7ywvwbh",
+        templateParams,
+        "Ueg7o-QUEuKvqMRqr"
+      )
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+        setIsSuccess(true); // Set success state
+        setShowModal(true); // Show success modal
 
-    // Reset the form fields
-    setName("");
-    setEmail("");
-    setSelectedRole("");
-    setHelpWith("Not Selected");
-    setSelectedSource("");
-    setBudget("5-10k");
-    setMessage("");
+        // Reset the form fields after success
+        setName("");
+        setEmail("");
+        setSelectedRole("");
+        setHelpWith("Not Selected");
+        setSelectedSource("");
+        setBudget("5-10k");
+        setMessage("");
+        setNameError(false);
+        setEmailError(false);
+        setMessageError(false);
+      })
+      .catch((error) => {
+        console.log("FAILED...", error);
+        setIsSuccess(false); // Set error state
+        setShowModal(true); // Show error modal
+      });
+
+    console.log("Form Data:", templateParams); // Log form data for debugging
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   setNameError(!name);
+  //   setEmailError(!email);
+  //   setMessageError(!message);
+
+  //   if (!name || !email || !message) {
+  //     // Prevent modal from showing if there are errors
+  //     return;
+  //   }
+
+  //   const templateParams = {
+  //     to_name: "Recipient Name",
+  //     from_name: name,
+  //     email_id: email,
+  //     message: message,
+  //     role: selectedRole,
+  //     help_with: helpWith,
+  //     source: selectedSource,
+  //     budget: budget,
+  //   };
+
+  //   console.log("Form Data:", templateParams);
+  //   setIsSuccess(true);
+  //   setShowModal(true);
+
+  //   // Reset the form fields
+  //   setName("");
+  //   setEmail("");
+  //   setSelectedRole("");
+  //   setHelpWith("Not Selected");
+  //   setSelectedSource("");
+  //   setBudget("5-10k");
+  //   setMessage("");
+  // };
+
+  useEffect(() => {
+    if (showModal) {
+      const timer = setTimeout(() => setShowModal(false), 5000);
+      return () => clearTimeout(timer); // Cleanup if the component is unmounted
+    }
+  }, [showModal]);
 
   const router = useRouter();
   const handleNavigate = () => {
