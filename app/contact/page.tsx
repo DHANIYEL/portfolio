@@ -53,6 +53,14 @@ const ContactPage = () => {
       transition: { delay: 1.5, duration: 1, ease: "easeOut" },
     },
   };
+  useEffect(() => {
+    // Activate animation when the component mounts
+    gsap.fromTo(
+      ".contact_main, .contact_body", // Ensure you have the correct selector with a dot for classes
+      { opacity: 0, y: 50 }, // Starting state
+      { opacity: 1, y: 0, duration: 1, ease: "power2.Out" } // Ending state
+    );
+  }, []);
 
   emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
 
@@ -162,6 +170,7 @@ const ContactPage = () => {
   }, [showModal]);
 
   const router = useRouter();
+
   const handleNavigate = () => {
     // Create a smooth page transition using GSAP
     gsap.to(".contact_main, .contact_body", {
