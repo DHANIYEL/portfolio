@@ -282,14 +282,14 @@ const ContactPage: React.FC = () => {
               Please provide information for each section.{" "}
             </p>
 
-            <div className="text-[16px] z-10 mt-10 flex justify-center items-center max-md:overflow-y-auto min-w-max max-lg:-bottom-96 max-sm:-bottom-40 lg:bottom-20 max-md:inline h-[calc(100vh-20rem)] xl:top-20 xl:right-10 absolute ">
+            <div className="text-[16px] z-10 mt-10 flex justify-center items-center max-md:overflow-y-auto min-w-min max-xl:-bottom-96 max-sm:-bottom-40 max-md:inline h-[calc(100vh-20rem)] xl:top-20 xl:right-10 absolute ">
               {" "}
               {/* Adjust height as needed */}
               <form
                 onSubmit={handleSubmit}
                 className="space-y-9 max-w-screen-lg mx-auto font-semibold bg-white bg-opacity-0 shadow-md backdrop-blur-lg rounded-lg p-6"
               >
-                <div className="flex gap-4">
+                <div className="flex gap-4 max-sm:flex-col">
                   <input
                     type="text"
                     placeholder="NAME"
