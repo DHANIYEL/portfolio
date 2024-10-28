@@ -193,14 +193,25 @@ const ContactPage: React.FC = () => {
     });
   };
   const iconNavigate = () => {
-    // Create a smooth page transition using GSAP
+    // Animate elements to slide up and fade out
     gsap.to(".contact_main, .contact_body", {
       opacity: 0,
-      y: -50, // Slide the content up a bit
+      y: -50, // Slide the content up
       duration: 0.4,
       ease: "power2.inOut",
+      onComplete: () => {
+        // After 5 seconds, reset position and opacity
+        gsap.to(".contact_main, .contact_body", {
+          opacity: 1,
+          y: 0, // Reset to original position
+          duration: 0.4,
+          delay: 1, // Wait 5 seconds before resetting
+          ease: "power2.inOut",
+        });
+      },
     });
   };
+  
   return (
     <section className="relative w-screen h-screen overflow-y-auto">
       <motion.div
