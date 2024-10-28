@@ -6,12 +6,14 @@ interface GlowButtonProps {
   children: React.ReactNode;
   color?: string;
   onClick?: () => void;
+  onDoubleClick?: () => void; // Add onDoubleClick prop
 }
 
 export const GlowButton: React.FC<GlowButtonProps> = ({
   children,
   color = "#14013d",
   onClick,
+  onDoubleClick, // Destructure onDoubleClick
   ...props
 }) => {
   const buttonRef = useRef<HTMLDivElement | null>(null);
@@ -94,6 +96,7 @@ export const GlowButton: React.FC<GlowButtonProps> = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMousePosition({ x: -24, y: -1 })}
       onClick={onClick}
+      onDoubleClick={onDoubleClick} // Add the onDoubleClick event handler
       {...props}
     >
       {shadows}

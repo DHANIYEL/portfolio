@@ -134,7 +134,7 @@ const HomePage = () => {
             animate="visible"
             className="resume-btn z-50"
           >
-            <GlowButton color={"#ffffff"} onClick={handleDownload}>
+            <GlowButton color={"#ffffff"} onDoubleClick={handleDownload}>
               RESUME
             </GlowButton>
           </motion.div>
