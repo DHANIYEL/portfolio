@@ -13,10 +13,8 @@ const Page = () => {
   const { x, y } = useMousePosition();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [isHolding, setIsHolding] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [popupShown, setPopupShown] = useState(false);
-  const [holdTimer, setHoldTimer] = useState<NodeJS.Timeout | null>(null);
   const size = isHovered ? 300 : 40;
 
   const ProjectItems = [
@@ -47,20 +45,14 @@ const Page = () => {
     },
   ];
 
-  const handleItemHoldRelease = (link: string) => {
-    if (holdTimer) {
-      clearTimeout(holdTimer);
-    }
-    if (isHolding) {
-      setIsHolding(false);
-      gsap.to(".hovered-image", {
-        opacity: 0,
-        duration: 0.6,
-        onComplete: () => {
-          window.open(link, "_blank");
-        },
-      });
-    }
+  const handleItemDoubleClick = (link: string) => {
+    gsap.to(".hovered-image", {
+      opacity: 0,
+      duration: 0.6,
+      onComplete: () => {
+        window.open(link, "_blank");
+      },
+    });
   };
 
   const showHoldPopup = () => {
@@ -143,34 +135,15 @@ const Page = () => {
                     showHoldPopup();
                   }
                 }}
-                onMouseLeave={() => {
-                  setHoveredItem(null);
-                  setIsHolding(false);
-                  if (holdTimer) {
-                    clearTimeout(holdTimer);
-                  }
-                }}
-                onMouseDown={() => {
-                  setIsHolding(true);
-                  const timer = setTimeout(() => {
-                    handleItemHoldRelease(item.link);
-                  }, 200);
-                  setHoldTimer(timer);
-                }}
-                onMouseUp={() => {
-                  if (holdTimer) {
-                    clearTimeout(holdTimer);
-                  } else {
-                    window.open(item.link, "_blank");
-                  }
-                }}
+                onMouseLeave={() => setHoveredItem(null)}
+                onDoubleClick={() => handleItemDoubleClick(item.link)}
                 initial={{ background: "transparent" }}
                 whileHover={{
                   background:
                     "linear-gradient(90deg, rgba(58, 86, 61, 1), rgba(114, 171, 120, 1), rgba(167, 251, 174, 1), rgba(227, 252, 99, 1))",
                   transition: { duration: 0.3 },
                   backgroundSize: "300% 300%",
-                  backgroundPosition: `${x}px ${y}px`, // Follow cursor position
+                  backgroundPosition: `${x}px ${y}px`,
                 }}
                 transition={{ duration: 0.5 }}
               >
@@ -218,7 +191,7 @@ const Page = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                Tap & Hold
+                Double-click to open
               </motion.div>
             )}
           </AnimatePresence>
