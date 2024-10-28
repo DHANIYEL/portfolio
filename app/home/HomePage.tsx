@@ -46,10 +46,9 @@ const HomePage = () => {
 
   // Variants for Resume button fade-in
   const fadeInVariant = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
       transition: { delay: 1, duration: 1, ease: "easeOut" },
     },
   };
@@ -96,7 +95,7 @@ const HomePage = () => {
           >
             {splitText("DHANIYEL DARVESH")}
           </h1>
-          <div className="flex justify-center items-center w-full  sm:-mt-24">
+          <div className="flex justify-center items-center w-full sm:-mt-24">
             <h3
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -166,5 +165,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-
