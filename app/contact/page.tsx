@@ -241,19 +241,19 @@ const ContactPage = () => {
               <div className=" flex gap-5 ">
                 <a href="https://www.linkedin.com/in/dhaniyel-darvesh-256987280/">
                   <FaLinkedin
-                    className="cursor-pointer hover:text-txt hover:scale-110 transition-transform duration-300"
+                    className="cursor-pointer hover:text-txt hover:scale-110 transition-all ease-in duration-300"
                     onClick={iconNavigate}
                   />
                 </a>
                 <a href="https://github.com/DHANIYEL">
                   <FaGithub
-                    className="cursor-pointer hover:text-txt hover:scale-110 transition-transform duration-300"
+                    className="cursor-pointer hover:text-txt hover:scale-110 transition-all ease-in duration-300"
                     onClick={iconNavigate}
                   />
                 </a>
                 <a href="https://www.instagram.com/dhaniiiyll/?hl=en">
                   <FaInstagram
-                    className="cursor-pointer hover:text-txt hover:scale-110   transition-transform duration-300 "
+                    className="cursor-pointer hover:text-txt hover:scale-110   transition-all ease-in duration-300 "
                     onClick={iconNavigate}
                   />
                 </a>

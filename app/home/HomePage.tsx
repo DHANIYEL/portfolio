@@ -91,13 +91,30 @@ const HomePage = () => {
           <h1
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="w-full split"
+            className="  split"
           >
             {splitText("DHANIYEL DARVESH")}
           </h1>
+          <div className="flex justify-center items-center w-full -mt-24">
+            <h3
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              className="porsche text-2xl"
+            >
+              FULLSTACK DEVELOPER
+            </h3>
+          </div>
         </motion.div>
         <div className="body">
           <h1 className="text-center split">{splitText("DHANIYEL DARVESH")}</h1>
+          <motion.div
+            variants={fadeInVariant}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-center items-center w-full -mt-24"
+          >
+            <h3 className="porsche text-2xl">FULLSTACK DEVELOPER</h3>
+          </motion.div>
         </div>
         <div
           style={{
