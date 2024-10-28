@@ -11,6 +11,8 @@ import { gsap } from "gsap";
 const HomePage = () => {
   const router = useRouter(); // Initialize the router
   const [isHovered, setIsHovered] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupShown, setPopupShown] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 400 : 40;
 
@@ -61,6 +63,15 @@ const HomePage = () => {
       opacity: 1,
       transition: { delay: 1.5, duration: 1, ease: "easeOut" },
     },
+  };
+
+  const showHoldPopup = () => {
+    setShowPopup(true);
+    setPopupShown(true);
+    // Hide the popup after 5 seconds
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
   };
 
   // Function to trigger smooth page animation and navigate to the About page
@@ -132,11 +143,31 @@ const HomePage = () => {
             variants={fadeInVariant}
             initial="hidden"
             animate="visible"
-            className="resume-btn z-50"
+            className=" z-50"
+            onMouseEnter={() => {
+              if (!popupShown) {
+                showHoldPopup();
+              }
+            }}
           >
             <GlowButton color={"#ffffff"} onDoubleClick={handleDownload}>
               RESUME
             </GlowButton>
+            {showPopup && (
+              <motion.div
+                className="popup-message fixed bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans px-3 py-2 rounded-lg"
+                style={{
+                  top: y - 50,
+                  left: x + 30,
+                }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                Double Click
+              </motion.div>
+            )}
           </motion.div>
 
           {/* Down arrow with Framer Motion animation */}
