@@ -128,7 +128,7 @@ const Page = () => {
               exit="exit" // Exit animation when removed
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="font-light font-sans text-4xl leading-relaxed max-w-screen-xl text-black text-center px-5"
+              className="font-light font-sans text-4xl max-sm:text-2xl leading-relaxed max-w-screen-xl text-black text-center px-5"
             >
               {content.description}
               <br />
@@ -169,7 +169,7 @@ const Page = () => {
               animate="visible"
               exit="exit"
             >
-              <p className="font-extralight font-sans text-4xl leading-relaxed max-w-screen-xl px-5 text-center">
+              <p className="font-extralight font-sans text-4xl max-sm:text-2xl leading-relaxed max-w-screen-xl px-5 text-center">
                 {content.description}
               </p>
             </motion.div>
