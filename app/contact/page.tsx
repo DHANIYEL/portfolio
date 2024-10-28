@@ -44,9 +44,9 @@ const ContactPage: React.FC = () => {
   ];
 
   const sources = [
-    "Google Search",
+    "Google",
     "Social Media",
-    "Event or Activation",
+    "LinkedIn",
     "Client Referral",
     "Other",
   ];
@@ -211,7 +211,7 @@ const ContactPage: React.FC = () => {
       },
     });
   };
-  
+
   return (
     <section className="relative w-screen h-screen overflow-y-auto">
       <motion.div
@@ -347,12 +347,9 @@ const ContactPage: React.FC = () => {
                       <option value="Not Selected" disabled>
                         Select
                       </option>
-                      <option>Strategy & Positioning</option>
                       <option>Branding</option>
-                      <option>Graphic Environments</option>
                       <option>Web Design</option>
-                      <option>Digital Communication</option>
-                      <option>Content Production</option>
+                      <option>Web Development</option>
                       <option>General Inquiry</option>
                     </select>
                   </label>
