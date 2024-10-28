@@ -8,13 +8,15 @@ import { FaAngleDoubleDown } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 
-const About = () => {
+const Page = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupShown, setPopupShown] = useState(false);
   const [section, setSection] = useState("about"); // Track the current section
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 300 : 40;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState(""); // Message for modal
 
   // Framer Motion variants for fade and slide up animation
   const fadeSlideVariant = {
@@ -83,6 +85,17 @@ const About = () => {
       duration: 0.7,
       ease: "power2.inOut",
       onComplete: () => {
+        // Set modal message and show modal for success or error
+        const success = true; // Simulate success or error
+        if (success) {
+          setModalMessage("Submission Successful!"); // Success message
+        } else {
+          setModalMessage("Submission Failed!"); // Error message
+        }
+        setModalVisible(true);
+        setTimeout(() => {
+          setModalVisible(false);
+        }, 3000);
         router.push("/projects"); // Navigate to the About page after animation
       },
     });
@@ -125,7 +138,7 @@ const About = () => {
 
             {/* Paragraph with fade and slide-up animation */}
             <motion.p
-              key={content.description} // Unique key for AnimatePresence to detect change
+              key={content.title} // Unique key for AnimatePresence to detect change
               variants={fadeSlideVariant} // Apply fade and slide animation variants
               initial="hidden" // Start hidden
               animate="visible" // Animate to visible
@@ -136,9 +149,9 @@ const About = () => {
             >
               {content.description}
               <br />
-              <p className="mt-5   text-black font-semibold">
+              <p className="mt-5 text-black font-semibold">
                 {" "}
-                I'am not interested in education system so i skip that.{" "}
+                I'm not interested in the education system, so I skip that.{" "}
               </p>
             </motion.p>
           </AnimatePresence>
@@ -170,7 +183,7 @@ const About = () => {
 
             {/* Additional paragraph with fade and slide-up animation */}
             <motion.div
-              key={content.description} // Unique key for AnimatePresence to detect change
+              key={content.title} // Unique key for AnimatePresence to detect change
               variants={fadeSlideVariant} // Apply fade and slide animation variants
               initial="hidden" // Start hidden
               animate="visible" // Animate to visible
@@ -182,6 +195,8 @@ const About = () => {
             </motion.div>
           </AnimatePresence>
         </motion.div>
+
+        {/* Popup message for user actions */}
         <AnimatePresence>
           {showPopup && (
             <motion.div
@@ -199,27 +214,37 @@ const About = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Modal Box for Submission Result */}
+        <AnimatePresence>
+          {modalVisible && (
+            <motion.div
+              className="modal-box fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="bg-white p-5 rounded-lg">
+                <h2 className="text-center">{modalMessage}</h2>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Arrow down icon to navigate */}
         <motion.div
-          className=" bottom-10 fixed z-[999]"
+          className="text-4xl text-[#EEE9C7] cursor-pointer"
           variants={arrowVariant}
           initial="hidden"
           animate="visible"
+          onClick={handleNavigate}
         >
-          <motion.div
-            className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
-            whileHover={{
-              scale: 1.2, // Slight scaling effect on hover
-              rotate: 360, // Rotate the icon on hover
-              transition: { duration: 0.4, ease: "easeInOut" }, // Smooth transition
-            }}
-            onClick={handleNavigate} // Trigger navigation when clicked
-          >
-            <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
-          </motion.div>
+          <FaAngleDoubleDown />
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default About;
+export default Page;

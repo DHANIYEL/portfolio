@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const BackgroundLayout = ({ children }) => {
+const BackgroundLayout: React.FC<BackgroundLayoutProps> = ({ children }) => {
   const backgroundRef = useRef(null);
 
   useEffect(() => {

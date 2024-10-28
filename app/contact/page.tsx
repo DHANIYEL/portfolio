@@ -14,8 +14,6 @@ import {
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import ModalBox from "../components/ModalBox";
-import gitIcon from "../../public//icon/github.svg";
-import Image from "next/image";
 
 const ContactPage = () => {
   const [hovered, setIsHovered] = useState(false);
