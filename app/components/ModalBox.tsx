@@ -5,16 +5,17 @@ import { CheckCircleIcon, XCircleIcon } from "lucide-react";
 interface ModalBoxProps {
   show: boolean;
   isSuccess: boolean;
-  onClose: () => void;
 }
 
-const ModalBox: React.FC<ModalBoxProps> = ({ show, isSuccess, onClose }) => {
+const ModalBox: React.FC<ModalBoxProps> = ({ show, isSuccess }) => {
   useEffect(() => {
     if (show) {
-      const timer = setTimeout(onClose, 5000); // Close modal after 5 seconds
+      const timer = setTimeout(() => {
+        // Here, you might want to handle the closing logic internally if needed
+      }, 5000); // Close modal after 5 seconds
       return () => clearTimeout(timer); // Clear timer if modal is closed early
     }
-  }, [show, onClose]);
+  }, [show]);
 
   if (!show) return null;
 

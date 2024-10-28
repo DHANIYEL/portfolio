@@ -21,23 +21,17 @@ import gsapIcon from "../../public/icon/gsap-greensock.svg";
 import gitIcon from "../../public/icon/git.svg";
 import githubIcon from "../../public/icon/github.svg";
 import vscodeIcon from "../../public/icon/vscode.svg";
-import { AnimatePresence, motion } from "framer-motion";
-import useMousePosition from "../utils/useMousePosition";
+import { motion } from "framer-motion";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 
-const page = () => {
-  const { x, y } = useMousePosition();
-
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupShown, setPopupShown] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+const Page = () => {
   const [isAnimating, setIsAnimating] = useState(false); // State for controlling animation
 
   const leftIconVariant = {
     hidden: { opacity: 0, x: -100 },
-    visible: (index) => ({
+    visible: (index: number) => ({
       opacity: 1,
       x: 0,
       transition: { duration: 0.9, delay: index * 0.2 },
@@ -47,7 +41,7 @@ const page = () => {
 
   const rightIconVariant = {
     hidden: { opacity: 0, x: 100 },
-    visible: (index) => ({
+    visible: (index: number) => ({
       opacity: 1,
       x: 0,
       transition: { duration: 0.9, delay: index * 0.2 },
@@ -65,17 +59,6 @@ const page = () => {
       },
     },
     exit: { opacity: 0, y: 20, transition: { duration: 0.3 } }, // Exit animation for smooth fade-out
-  };
-
-  // popup
-
-  const showHoldPopup = () => {
-    setShowPopup(true);
-    setPopupShown(true); // Set popup shown to true
-    // Hide the popup after 5 seconds
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 5000);
   };
 
   const arrowFadeUpVariant = {
@@ -100,22 +83,31 @@ const page = () => {
       x: (i, el) => (el.classList.contains("fade-element") ? -50 : 50),
       duration: 0.5,
       stagger: 0.2,
-      onComplete: () =>
-        gsap.set(".fade-element, .fade-element-right", { display: "none" }),
+      onComplete: () => {
+        gsap.set(".fade-element, .fade-element-right", { display: "none" });
+        return; // Ensure no value is returned
+      },
     });
 
     gsap.to(".calcio", {
       opacity: 0,
       y: -30,
       duration: 0.8,
-      onComplete: () => gsap.set(".calcio", { display: "none" }),
+      onComplete: () => {
+        gsap.set(".calcio", { display: "none" });
+        return; // Ensure no value is returned
+      },
     });
+
     gsap.to(".arrow-down", {
       opacity: 0,
       y: 50, // Slide the content up a bit
       duration: 0.7,
       ease: "power2.inOut",
-      onComplete: () => gsap.set(".arrow-down", { display: "none" }),
+      onComplete: () => {
+        gsap.set(".arrow-down", { display: "none" });
+        return; // Ensure no value is returned
+      },
     });
 
     gsap.delayedCall(1, () => {
@@ -132,35 +124,9 @@ const page = () => {
       className=" h-screen  w-screen overflow-y-auto"
     >
       <div className="flex justify-center py-10 ">
-        <h1
-          onMouseEnter={() => {
-            setIsHovered(true);
-            if (!popupShown) {
-              showHoldPopup();
-            }
-          }}
-          onMouseLeave={() => setIsHovered(false)}
-          className="calcio text-9xl py-10 cursor-pointer max-md:text-7xl text-txt"
-        >
+        <h1 className="calcio text-9xl py-10 cursor-pointer max-md:text-7xl text-txt">
           SKILLS
         </h1>
-        <AnimatePresence>
-          {showPopup && (
-            <motion.div
-              className="popup-message fixed bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans text-white px-3 py-2 rounded-lg"
-              style={{
-                top: y - 50,
-                left: x + 30,
-              }}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              Tap 3 Times
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
       <div className=" flex flex-col justify-center p-10 mb-10 max-sm:p-2 items-center">
         {/* main div */}
@@ -551,4 +517,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

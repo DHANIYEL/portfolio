@@ -3,8 +3,13 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
+
+interface BackgroundLayoutProps {
+  children: React.ReactNode; // or other prop types you need
+}
+
 const BackgroundLayout: React.FC<BackgroundLayoutProps> = ({ children }) => {
-  const backgroundRef = useRef(null);
+  const backgroundRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const tl = gsap.timeline({ repeat: -1, yoyo: true });

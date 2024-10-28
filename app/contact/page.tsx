@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import ModalBox from "../components/ModalBox";
 
-const ContactPage = () => {
+const ContactPage: React.FC = () => {
   const [hovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = hovered ? 300 : 40;
@@ -74,7 +74,7 @@ const ContactPage = () => {
 
   emailjs.init("Ueg7o-QUEuKvqMRqr"); // Your User ID
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Check for input errors and set error states

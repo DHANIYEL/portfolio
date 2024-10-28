@@ -46,9 +46,10 @@ const HomePage = () => {
 
   // Variants for Resume button fade-in
   const fadeInVariant = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: { delay: 1, duration: 1, ease: "easeOut" },
     },
   };

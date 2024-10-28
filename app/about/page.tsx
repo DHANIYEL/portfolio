@@ -15,21 +15,19 @@ const Page = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 300 : 40;
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalMessage, setModalMessage] = useState(""); // Message for modal
 
   // Framer Motion variants for fade and slide up animation
   const fadeSlideVariant = {
-    hidden: { opacity: 0, y: 20 }, // Start off-screen slightly down
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5, // Adjust duration for the fade effect
-        ease: "easeInOut", // Smooth easing function
+        duration: 0.5,
+        ease: "easeInOut",
       },
     },
-    exit: { opacity: 0, y: 20, transition: { duration: 0.3 } }, // Exit animation for smooth fade-out
+    exit: { opacity: 0, y: 20, transition: { duration: 0.3 } },
   };
 
   const aboutContent = {
@@ -66,7 +64,7 @@ const Page = () => {
 
   const showHoldPopup = () => {
     setShowPopup(true);
-    setPopupShown(true); // Set popup shown to true
+    setPopupShown(true);
     // Hide the popup after 5 seconds
     setTimeout(() => {
       setShowPopup(false);
@@ -78,25 +76,13 @@ const Page = () => {
 
   const router = useRouter();
   const handleNavigate = () => {
-    // Create a smooth page transition using GSAP
     gsap.to(".about_main, .about_body", {
       opacity: 0,
-      y: -50, // Slide the content up a bit
+      y: -50,
       duration: 0.7,
       ease: "power2.inOut",
       onComplete: () => {
-        // Set modal message and show modal for success or error
-        const success = true; // Simulate success or error
-        if (success) {
-          setModalMessage("Submission Successful!"); // Success message
-        } else {
-          setModalMessage("Submission Failed!"); // Error message
-        }
-        setModalVisible(true);
-        setTimeout(() => {
-          setModalVisible(false);
-        }, 3000);
-        router.push("/projects"); // Navigate to the About page after animation
+        router.push("/projects");
       },
     });
   };
@@ -107,20 +93,18 @@ const Page = () => {
         <motion.div
           className="about_mask flex justify-start gap-10 items-center flex-col"
           animate={{
-            WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`, // Center the mask at mouse position
+            WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`,
             WebkitMaskSize: `${size}px`,
           }}
           transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
         >
-          {/* AnimatePresence to handle fade-in and fade-out */}
           <AnimatePresence mode="wait">
-            {/* Heading with fade and slide-up animation */}
             <motion.h1
-              key={content.title} // Unique key for AnimatePresence to detect change
-              variants={fadeSlideVariant} // Apply fade and slide animation variants
-              initial="hidden" // Start hidden
-              animate="visible" // Animate to visible
-              exit="exit" // Exit animation when removed
+              key={`${section}-title`} // Use a unique key for each title
+              variants={fadeSlideVariant}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
               onMouseEnter={() => {
                 setIsHovered(true);
                 if (!popupShown) {
@@ -131,13 +115,12 @@ const Page = () => {
               className="text-center cursor-pointer"
               onClick={() =>
                 setSection(section === "about" ? "experience" : "about")
-              } // Toggle section on click
+              }
             >
               {content.title}
             </motion.h1>
 
-            {/* Paragraph with fade and slide-up animation */}
-            <motion.p
+            <motion.div
               key={content.title} // Unique key for AnimatePresence to detect change
               variants={fadeSlideVariant} // Apply fade and slide animation variants
               initial="hidden" // Start hidden
@@ -149,45 +132,42 @@ const Page = () => {
             >
               {content.description}
               <br />
-              <p className="mt-5 text-black font-semibold">
+              <motion.p className="mt-5 text-black font-semibold">
                 {" "}
-                I'm not interested in the education system, so I skip that.{" "}
-              </p>
-            </motion.p>
+                I&apos;am not interested in education system so i skip that.{" "}
+              </motion.p>
+            </motion.div>
           </AnimatePresence>
         </motion.div>
 
-        {/* About Body with Fade Animation */}
         <motion.div
           className="about_body flex justify-start gap-10 items-center flex-col"
-          variants={fadeSlideVariant} // Apply fade and slide animation variants
-          initial="hidden" // Start hidden
-          animate="visible" // Animate to visible
-          exit="exit" // Exit animation when removed
+          variants={fadeSlideVariant}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
           <AnimatePresence mode="wait">
-            {/* Additional heading with fade and slide-up animation */}
             <motion.h1
-              key={content.title} // Unique key for AnimatePresence to detect change
-              variants={fadeSlideVariant} // Apply fade and slide animation variants
-              initial="hidden" // Start hidden
-              animate="visible" // Animate to visible
-              exit="exit" // Exit animation when removed
+              key={`${section}-body-title`} // Use a unique key for the body title
+              variants={fadeSlideVariant}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
               className="text-center"
               onClick={() =>
                 setSection(section === "about" ? "experience" : "about")
-              } // Toggle section on click
+              }
             >
               {content.title}
             </motion.h1>
 
-            {/* Additional paragraph with fade and slide-up animation */}
             <motion.div
-              key={content.title} // Unique key for AnimatePresence to detect change
-              variants={fadeSlideVariant} // Apply fade and slide animation variants
-              initial="hidden" // Start hidden
-              animate="visible" // Animate to visible
-              exit="exit" // Exit animation when removed
+              key={`${section}-body-description`} // Use a unique key for the body description
+              variants={fadeSlideVariant}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
             >
               <p className="font-extralight font-sans text-4xl leading-relaxed max-w-screen-xl px-5 text-center">
                 {content.description}
@@ -195,8 +175,6 @@ const Page = () => {
             </motion.div>
           </AnimatePresence>
         </motion.div>
-
-        {/* Popup message for user actions */}
         <AnimatePresence>
           {showPopup && (
             <motion.div
@@ -214,33 +192,23 @@ const Page = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Modal Box for Submission Result */}
-        <AnimatePresence>
-          {modalVisible && (
-            <motion.div
-              className="modal-box fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="bg-white p-5 rounded-lg">
-                <h2 className="text-center">{modalMessage}</h2>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Arrow down icon to navigate */}
         <motion.div
-          className="text-4xl text-[#EEE9C7] cursor-pointer"
+          className="bottom-10 fixed z-[999]"
           variants={arrowVariant}
           initial="hidden"
           animate="visible"
-          onClick={handleNavigate}
         >
-          <FaAngleDoubleDown />
+          <motion.div
+            className="border-[#eee9c7] border-[2px] w-10 h-10 rounded-full flex justify-center items-center cursor-pointer arrow-icon"
+            whileHover={{
+              scale: 1.2,
+              rotate: 360,
+              transition: { duration: 0.4, ease: "easeInOut" },
+            }}
+            onClick={handleNavigate}
+          >
+            <FaAngleDoubleDown className="w-5 h-5 z-50 text-white" />
+          </motion.div>
         </motion.div>
       </div>
     </div>
