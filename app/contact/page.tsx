@@ -282,7 +282,7 @@ const ContactPage: React.FC = () => {
               Please provide information for each section.{" "}
             </p>
 
-            <div className="text-[16px] z-10 mt-10 flex justify-center items-center max-md:overflow-y-auto min-w-min max-xl:-bottom-96 max-sm:-bottom-40 max-md:inline h-[calc(100vh-20rem)] xl:top-20 xl:right-10 absolute ">
+            <div className="text-[16px] z-10 mt-10 flex justify-center items-center max-md:overflow-y-auto min-w-min max-xl:-bottom-96 max-sm:-bottom-40 max-md:inline h-[calc(100vh-20rem)] xl:top-48 xl:right-10 absolute ">
               {" "}
               {/* Adjust height as needed */}
               <form
