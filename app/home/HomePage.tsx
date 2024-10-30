@@ -155,7 +155,7 @@ const HomePage = () => {
             </GlowButton>
             {showPopup && (
               <motion.div
-                className="popup-message fixed bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans px-3 py-2 rounded-lg"
+                className="popup-message fixed text-white bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-30 text-lg font-sans px-3 py-2 rounded-lg"
                 style={{
                   top: y - 50,
                   left: x + 30,
