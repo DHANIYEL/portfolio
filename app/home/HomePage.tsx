@@ -124,7 +124,7 @@ const HomePage = () => {
             animate="visible"
             className="flex justify-center items-center w-full sm:-mt-24"
           >
-            <h3 className="porsche text-2xl max-sm:text-lg">
+            <h3 className="porsche text-2xl max-sm:text-lg text-center">
               FULLSTACK DEVELOPER
             </h3>
           </motion.div>
