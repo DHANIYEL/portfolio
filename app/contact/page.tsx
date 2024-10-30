@@ -26,7 +26,6 @@ const ContactPage: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [helpWith, setHelpWith] = useState("Not Selected");
-  const [budget, setBudget] = useState("5-10k");
 
   const [showModal, setShowModal] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -99,7 +98,6 @@ const ContactPage: React.FC = () => {
       role: selectedRole,
       help_with: helpWith,
       source: selectedSource,
-      budget: budget,
     };
 
     emailjs
@@ -120,7 +118,6 @@ const ContactPage: React.FC = () => {
         setSelectedRole("");
         setHelpWith("Not Selected");
         setSelectedSource("");
-        setBudget("5-10k");
         setMessage("");
         setNameError(false);
         setEmailError(false);
@@ -330,7 +327,6 @@ const ContactPage: React.FC = () => {
                       ))}
                     </div>
                   </label>
-
                   {/* Help With Selection */}
                   <label className="block font-bold">
                     <p className="mb-3">What can we help you with?*</p>
@@ -353,7 +349,6 @@ const ContactPage: React.FC = () => {
                       <option>General Inquiry</option>
                     </select>
                   </label>
-
                   {/* Source Selection */}
                   <label className="block font-bold">
                     <p className="mb-3">How did you find us?*</p>
@@ -373,8 +368,7 @@ const ContactPage: React.FC = () => {
                       ))}
                     </div>
                   </label>
-
-                  {/* Budget Selection */}
+                  {/* Budget Selection
                   <label className="block font-bold">
                     <p className="mb-3">Project Budget*</p>
                     <select
@@ -396,8 +390,7 @@ const ContactPage: React.FC = () => {
                       <option>25-50k</option>
                       <option>50k+</option>
                     </select>
-                  </label>
-
+                  </label> */}
                   {/* Message Area */}
                   <div>
                     <textarea
