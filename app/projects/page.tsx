@@ -104,7 +104,7 @@ const Page = () => {
   return (
     <div className="relative w-screen">
       <div>
-        <div className="text-9xl 2xl:text-[210px] urbanshock text-[#EEE9C7] project_main">
+        <div className="text-9xl 2xl:text-[180px] urbanshock text-[#EEE9C7] project_main">
           <motion.div
             animate={{
               WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`,
