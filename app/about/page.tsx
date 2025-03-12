@@ -134,7 +134,7 @@ const Page = () => {
               <br />
               <motion.p className="mt-5 text-black font-semibold">
                 {" "}
-                I&apos;am not interested in education system so i skip that.{" "}
+                {/* I&apos;am not interested in education system so i skip that.{" "} */}
               </motion.p>
             </motion.div>
           </AnimatePresence>
