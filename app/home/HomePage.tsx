@@ -110,7 +110,7 @@ const HomePage = () => {
             <h3
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="porsche text-2xl max-sm:text-lg"
+              className="porsche text-2xl max-sm:text-lg text-center"
             >
               FULLSTACK DEVELOPER
             </h3>
