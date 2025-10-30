@@ -16,7 +16,7 @@ import saasIcon from "../../public/icon/saas.svg";
 import figmaIcon from "../../public/icon/figma.svg";
 import wordpressIcon from "../../public/icon/wordpress.svg";
 import aeIcon from "../../public/icon/after-effects.svg";
-import awsIcon from "../../public/icon/aws-svgrepo-com.svg";
+// import awsIcon from "../../public/icon/aws-svgrepo-com.svg";
 import framerIcon from "../../public/icon/framer-motion.svg";
 import gsapIcon from "../../public/icon/gsap-greensock.svg";
 import gitIcon from "../../public/icon/git.svg";
