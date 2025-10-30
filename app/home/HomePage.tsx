@@ -19,8 +19,8 @@ const HomePage = () => {
   // Function to handle the resume download
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/assets/DhaniyelDarveshResume.pdf"; // Path to your PDF file
-    link.download = "Dhaniyel_Darvesh_Resume.pdf"; // The file name you want to give the downloaded file
+    link.href = "/assets/Dhaniyel_Darvesh_FullStack_Developer_Resume.pdf.pdf"; // Path to your PDF file
+    link.download = "Dhaniyel_Darvesh_FullStack_Developer_Resume.pdf.pdf"; // The file name you want to give the downloaded file
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link); // Clean up by removing the link after the click
