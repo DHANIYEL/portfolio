@@ -29,6 +29,12 @@
     color: #000;
     z-index: 1;
   }
+
+  @media (max-width: 640px) {
+    .contact_mask {
+      mask-size: 30px;
+    }
+  }
   select {
     padding: 12px 40px 12px 16px; /* Add padding to make it look better */
     border: 2px solid #EEE9C7; /* Change the border color */

@@ -33,6 +33,12 @@
       color: whitesmoke;
     }
   }
+
+  @media (max-width: 640px) {
+    .about_mask {
+      mask-size: 30px;
+    }
+  }
   .popup-message {
     z-index: 1000; /* Make sure it's above other elements */
     transition: opacity 0.3s ease, transform 0.3s ease;

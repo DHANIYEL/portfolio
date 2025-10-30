@@ -210,12 +210,12 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <section className="relative w-screen h-screen overflow-y-auto">
+    <section className="relative w-screen h-screen overflow-y-auto overflow-x-hidden">
       <motion.div
         variants={fadeSlideVariant}
         initial="hidden"
         animate="visible"
-        className="contact_main text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7]"
+        className="contact_main text-[256px] max-xl:text-[180px] max-lg:text-[140px] max-md:text-[100px] max-sm:text-6xl urbanshock text-[#EEE9C7]"
       >
         <motion.div
           className="contact_mask"
@@ -234,17 +234,17 @@ const ContactPage: React.FC = () => {
           <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="font-sans text-2xl font-light p-10 flex flex-col gap-5 w-fit"
+            className="font-sans text-2xl max-lg:text-xl max-md:text-lg font-light p-10 max-md:p-5 max-sm:p-4 flex flex-col gap-5 w-fit"
           >
-            <h3 className="text-4xl font-semibold">
+            <h3 className="text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-xl font-semibold">
               Start your project with ME.
             </h3>
-            <p className="max-w-screen-md">
+            <p className="max-w-screen-md max-sm:text-base">
               Providing these details up front helps us manage requests better.
               Please provide information for each section.
             </p>
-            <div className="text-5xl text-black">
-              <div className=" flex gap-5 ">
+            <div className="text-5xl max-md:text-4xl max-sm:text-3xl text-black">
+              <div className=" flex gap-5 max-sm:gap-3">
                 <a href="https://www.linkedin.com/in/dhaniyel-darvesh-256987280/">
                   <FaLinkedin
                     className="cursor-pointer hover:text-txt hover:scale-110 transition-all ease-in duration-300"
@@ -270,21 +270,21 @@ const ContactPage: React.FC = () => {
 
         <div className="contact_body">
           <h1 className="text-center">CONTACT</h1>
-          <div className="font-sans text-2xl font-light p-10 flex flex-col gap-5">
-            <h2 className="text-4xl font-semibold">
+          <div className="font-sans text-2xl max-lg:text-xl max-md:text-lg font-light p-10 max-md:p-5 max-sm:p-4 flex flex-col gap-5">
+            <h2 className="text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-xl font-semibold">
               Start your project with ME.
             </h2>
-            <p className="max-w-screen-md">
+            <p className="max-w-screen-md max-sm:text-base">
               Providing these details up front helps us manage requests better.
               Please provide information for each section.{" "}
             </p>
 
-            <div className="text-[16px] z-10 mt-10 flex justify-center items-center max-md:overflow-y-auto min-w-min max-xl:-bottom-96 max-sm:-bottom-40 max-md:inline h-[calc(100vh-20rem)] xl:top-48 xl:right-10 absolute ">
+            <div className="text-[16px] z-10 mt-10 flex justify-end items-center max-md:overflow-y-auto min-w-min max-xl:-bottom-96 max-sm:-bottom-40 max-md:inline h-[calc(100vh-20rem)] xl:top-48 xl:right-10 absolute w-full px-4 max-md:justify-center">
               {" "}
               {/* Adjust height as needed */}
               <form
                 onSubmit={handleSubmit}
-                className="space-y-9 max-w-screen-lg mx-auto font-semibold bg-white bg-opacity-0 shadow-md backdrop-blur-lg rounded-lg p-6"
+                className="space-y-9 max-md:space-y-6 max-sm:space-y-4 max-w-screen-lg w-full xl:max-w-2xl max-md:mx-auto font-semibold bg-white bg-opacity-0 shadow-md backdrop-blur-lg rounded-lg p-6 max-sm:p-4"
               >
                 <div className="flex gap-4 max-sm:flex-col">
                   <input
@@ -310,12 +310,12 @@ const ContactPage: React.FC = () => {
                 <div className="space-y-5">
                   {/* Role Selection */}
                   <label className="block font-bold">
-                    <p className="mb-3">What is your role?*</p>
-                    <div className="flex gap-5 justify-center items-center font-semibold">
+                    <p className="mb-3 max-sm:text-sm">What is your role?*</p>
+                    <div className="flex gap-5 max-md:gap-3 max-sm:gap-2 justify-center items-center font-semibold flex-wrap">
                       {roles.map((role) => (
                         <p
                           key={role}
-                          className={`border-[2px] border-txt px-3 py-2 rounded-xl cursor-pointer transition-all duration-300 ${
+                          className={`border-[2px] border-txt px-3 py-2 max-sm:px-2 max-sm:py-1 max-sm:text-xs rounded-xl cursor-pointer transition-all duration-300 ${
                             selectedRole === role
                               ? "bg-txt text-black"
                               : "bg-transparent text-txt"
@@ -329,7 +329,7 @@ const ContactPage: React.FC = () => {
                   </label>
                   {/* Help With Selection */}
                   <label className="block font-bold">
-                    <p className="mb-3">What can we help you with?*</p>
+                    <p className="mb-3 max-sm:text-sm">What can we help you with?*</p>
                     <select
                       value={helpWith}
                       onChange={(e) => setHelpWith(e.target.value)}
@@ -351,12 +351,12 @@ const ContactPage: React.FC = () => {
                   </label>
                   {/* Source Selection */}
                   <label className="block font-bold">
-                    <p className="mb-3">How did you find us?*</p>
-                    <div className="flex gap-5 justify-center items-center font-semibold">
+                    <p className="mb-3 max-sm:text-sm">How did you find us?*</p>
+                    <div className="flex gap-5 max-md:gap-3 max-sm:gap-2 justify-center items-center font-semibold flex-wrap">
                       {sources.map((source) => (
                         <p
                           key={source}
-                          className={`border-[2px] border-txt px-3 py-2 rounded-xl cursor-pointer transition-all duration-300 ${
+                          className={`border-[2px] border-txt px-3 py-2 max-sm:px-2 max-sm:py-1 max-sm:text-xs rounded-xl cursor-pointer transition-all duration-300 ${
                             selectedSource === source
                               ? "bg-txt text-black"
                               : "bg-transparent text-txt"
@@ -427,7 +427,7 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
         <motion.div
-          className=" bottom-10 fixed z-[999]"
+          className="bottom-10 fixed z-[999] left-1/2 transform -translate-x-1/2"
           variants={arrowVariant}
           initial="hidden"
           animate="visible"

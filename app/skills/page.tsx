@@ -121,21 +121,21 @@ const Page = () => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className=" h-screen  w-screen overflow-y-auto"
+      className=" h-screen  w-screen overflow-y-auto overflow-x-hidden"
     >
-      <div className="flex justify-center py-10 ">
-        <h1 className="calcio text-9xl py-10 cursor-pointer max-md:text-7xl text-txt">
+      <div className="flex justify-center py-10 px-4">
+        <h1 className="calcio text-9xl py-10 cursor-pointer max-lg:text-8xl max-md:text-6xl max-sm:text-5xl text-txt">
           SKILLS
         </h1>
       </div>
-      <div className=" flex flex-col justify-center p-10 mb-10 max-sm:p-2 items-center">
+      <div className=" flex flex-col justify-center p-10 mb-10 max-md:p-5 max-sm:p-2 items-center">
         {/* main div */}
-        <div className=" flex gap-20 max-md:flex-col ">
+        <div className=" flex gap-20 max-xl:gap-10 max-lg:gap-5 max-md:flex-col max-md:gap-5">
           <div className="first-icon flex flex-col gap-3 justify-center items-center fade-element">
             {/* grid layout 1st languages */}
-            <div className="flex gap-5 w-full max-w-screen-lg">
+            <div className="flex gap-5 max-sm:gap-3 w-full max-w-screen-lg">
               {/* grid section */}
-              <motion.div className="grid grid-cols-2 gap-5  flex-1 w-full">
+              <motion.div className="grid grid-cols-2 gap-5 max-sm:gap-3 flex-1 w-full">
                 <motion.div
                   variants={leftIconVariant}
                   custom={1}
@@ -230,7 +230,7 @@ const Page = () => {
 
             {/* second section  */}
             <div className="flex w-full">
-              <div className="flex gap-3">
+              <div className="flex gap-3 max-sm:gap-2">
                 <motion.div
                   variants={leftIconVariant}
                   custom={4}
@@ -248,7 +248,7 @@ const Page = () => {
                     className="object-contain"
                   />
                 </motion.div>
-                <div className="grid grid-cols-2 gap-3 ">
+                <div className="grid grid-cols-2 gap-3 max-sm:gap-2">
                   {/* Smaller TS and SAAS icons */}
                   <motion.div
                     variants={leftIconVariant}
@@ -304,7 +304,7 @@ const Page = () => {
                   </motion.div>
                 </div>
                 <div>
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-3 max-sm:gap-2">
                     <motion.div
                       variants={leftIconVariant}
                       custom={8}
@@ -344,8 +344,8 @@ const Page = () => {
               </div>
             </div>
           </div>
-          <div className="second-icon flex gap-3 justify-center items-center h-full fade-element-right">
-            <div className="flex flex-col gap-3 justify-start">
+          <div className="second-icon flex gap-3 max-sm:gap-2 justify-center items-center h-full fade-element-right">
+            <div className="flex flex-col gap-3 max-sm:gap-2 justify-start">
               <motion.div
                 variants={rightIconVariant}
                 custom={0}
@@ -363,7 +363,7 @@ const Page = () => {
                   className="object-contain"
                 />
               </motion.div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 max-sm:gap-2">
                 <motion.div
                   variants={rightIconVariant}
                   custom={1}
@@ -400,8 +400,8 @@ const Page = () => {
                 </motion.div>
               </div>
             </div>
-            <div className="flex flex-col gap-3">
-              <div className="flex gap-3">
+            <div className="flex flex-col gap-3 max-sm:gap-2">
+              <div className="flex gap-3 max-sm:gap-2">
                 <motion.div
                   variants={rightIconVariant}
                   custom={3}
@@ -454,7 +454,7 @@ const Page = () => {
                   className="object-contain w-full h-full"
                 />
               </motion.div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 max-sm:gap-2">
                 <motion.div
                   variants={rightIconVariant}
                   custom={6}

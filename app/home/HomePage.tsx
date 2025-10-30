@@ -89,8 +89,8 @@ const HomePage = () => {
   };
 
   return (
-    <div className="relative w-screen h-screen">
-      <div className="text-[256px] max-md:text-[200px] max-sm:text-8xl urbanshock text-[#EEE9C7] main">
+    <div className="relative w-screen h-screen overflow-hidden">
+      <div className="text-[256px] max-xl:text-[180px] max-lg:text-[140px] max-md:text-[100px] max-sm:text-6xl urbanshock text-[#EEE9C7] main">
         <motion.div
           className="mask"
           animate={{
@@ -106,11 +106,11 @@ const HomePage = () => {
           >
             {splitText("DHANIYEL DARVESH")}
           </h1>
-          <div className="flex justify-center items-center w-full sm:-mt-24">
+          <div className="flex justify-center items-center w-full sm:-mt-24 px-4">
             <h3
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="porsche text-2xl max-sm:text-lg text-center"
+              className="porsche text-2xl max-lg:text-xl max-md:text-lg max-sm:text-base text-center"
             >
               FULLSTACK DEVELOPER
             </h3>
@@ -122,9 +122,9 @@ const HomePage = () => {
             variants={fadeInVariant}
             initial="hidden"
             animate="visible"
-            className="flex justify-center items-center w-full sm:-mt-24"
+            className="flex justify-center items-center w-full sm:-mt-24 px-4"
           >
-            <h3 className="porsche text-2xl max-sm:text-lg text-center">
+            <h3 className="porsche text-2xl max-lg:text-xl max-md:text-lg max-sm:text-base text-center">
               FULLSTACK DEVELOPER
             </h3>
           </motion.div>

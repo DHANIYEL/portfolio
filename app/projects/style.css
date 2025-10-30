@@ -32,6 +32,12 @@
   }
 }
 
+@media (max-width: 640px) {
+  .project_mask {
+    mask-size: 30px;
+  }
+}
+
 .project_item_border {
   border-style: solid;
   border-image: linear-gradient(to right, black, #5ef13d, black) 1;

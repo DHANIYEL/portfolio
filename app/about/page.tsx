@@ -88,8 +88,8 @@ const Page = () => {
   };
 
   return (
-    <div className="relative w-screen overflow-y-auto">
-      <div className="text-9xl 2xl:text-[256px] urbanshock text-[#EEE9C7] about_main">
+    <div className="relative w-screen overflow-y-auto overflow-x-hidden">
+      <div className="text-9xl 2xl:text-[256px] xl:text-[180px] max-lg:text-[140px] max-md:text-[100px] max-sm:text-6xl urbanshock text-[#EEE9C7] about_main">
         <motion.div
           className="about_mask flex justify-start gap-10 items-center flex-col"
           animate={{
@@ -128,7 +128,7 @@ const Page = () => {
               exit="exit" // Exit animation when removed
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="font-light font-sans text-4xl max-sm:text-2xl leading-relaxed max-w-screen-xl text-black text-center px-5"
+              className="font-light font-sans text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-lg leading-relaxed max-w-screen-xl text-black text-center px-5"
             >
               {content.description}
               <br />
@@ -169,7 +169,7 @@ const Page = () => {
               animate="visible"
               exit="exit"
             >
-              <p className="font-extralight font-sans text-4xl max-sm:text-2xl leading-relaxed max-w-screen-xl px-5 text-center">
+              <p className="font-extralight font-sans text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-lg leading-relaxed max-w-screen-xl px-5 text-center">
                 {content.description}
               </p>
             </motion.div>

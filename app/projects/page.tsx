@@ -102,9 +102,9 @@ const Page = () => {
   };
 
   return (
-    <div className="relative w-screen">
+    <div className="relative w-screen overflow-x-hidden">
       <div>
-        <div className="text-9xl 2xl:text-[180px] urbanshock text-[#EEE9C7] project_main">
+        <div className="text-9xl 2xl:text-[180px] xl:text-[140px] max-lg:text-[100px] max-md:text-7xl max-sm:text-5xl urbanshock text-[#EEE9C7] project_main">
           <motion.div
             animate={{
               WebkitMaskPosition: `${x - size / 2}px ${y - size / 2}px`,
@@ -124,7 +124,7 @@ const Page = () => {
             <h1>PROJECTS</h1>
           </motion.div>
 
-          <section className="porsche 2xl:text-5xl z-50 text-3xl mt-20 max-md:text-xl absolute w-full">
+          <section className="porsche 2xl:text-5xl xl:text-4xl z-50 text-3xl mt-20 max-md:text-xl max-sm:text-base absolute w-full">
             {ProjectItems.map((item) => (
               <motion.div
                 className="project_item_border hover:text-black border-y cursor-pointer py-7 flex justify-between items-center"
@@ -147,8 +147,8 @@ const Page = () => {
                 }}
                 transition={{ duration: 0.5 }}
               >
-                <h2 className="max-md:px-16 max-sm:px-6 px-32">{item.name}</h2>
-                <BsArrowUpRight className="mr-10 max-md:mr-4" />
+                <h2 className="max-md:px-16 max-sm:px-4 px-32">{item.name}</h2>
+                <BsArrowUpRight className="mr-10 max-md:mr-4 max-sm:mr-2" />
               </motion.div>
             ))}
           </section>
@@ -166,12 +166,10 @@ const Page = () => {
                   position: "fixed",
                   top: y + 20,
                   left: x + 20,
-                  width: "300px",
-                  height: "200px",
                   pointerEvents: "none",
                   borderRadius: "15px",
                 }}
-                className="z-50 hovered-image"
+                className="z-50 hovered-image w-[300px] h-[200px] max-md:w-[200px] max-md:h-[133px] max-sm:w-[150px] max-sm:h-[100px]"
                 transition={{ ease: "easeInOut", duration: 0.6 }}
               />
             )}
