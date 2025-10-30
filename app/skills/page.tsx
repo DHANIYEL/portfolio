@@ -16,6 +16,7 @@ import saasIcon from "../../public/icon/saas.svg";
 import figmaIcon from "../../public/icon/figma.svg";
 import wordpressIcon from "../../public/icon/wordpress.svg";
 import aeIcon from "../../public/icon/after-effects.svg";
+import awsIcon from "../../public/icon/aws-svgrepo-com.svg";
 import framerIcon from "../../public/icon/framer-motion.svg";
 import gsapIcon from "../../public/icon/gsap-greensock.svg";
 import gitIcon from "../../public/icon/git.svg";
@@ -431,9 +432,9 @@ const Page = () => {
                     src={aeIcon}
                     alt="img"
                     layout="responsive"
-                    width={80} // Adjusted size for AE icon
-                    height={80} // Adjusted size for AE icon
-                    className="object-contain w-full h-full"
+                    // width={80} // Adjusted size for AE icon
+                    // height={80} // Adjusted size for AE icon
+                    className="object-contain w-[80px] h-[80px]"
                   />
                 </motion.div>
               </div>

@@ -24,28 +24,37 @@ const Page = () => {
       link: "https://gemini-clone-two-psi.vercel.app/",
     },
     {
-      name: "Car Hub",
-      imgSrc: "/assets/hoverImages/carhub.png",
-      link: "https://carhub-two.vercel.app/",
+      name: "Dcars",
+      imgSrc: "/assets/hoverImages/dcars.png",
+      // link: "",
     },
     {
-      name: "Hoster",
-      imgSrc: "/assets/hoverImages/cloud.png",
-      link: "https://serverninja.in/",
+      name: "Mom's & Wive",
+      imgSrc: "/assets/hoverImages/moms.png",
+      link: "https://momsandwives.com/",
     },
     {
-      name: "Nike",
-      imgSrc: "/assets/hoverImages/nike.png",
-      link: "https://nike-app-tailwindcss-bice.vercel.app/",
+      name: "Dexpress",
+      imgSrc: "/assets/hoverImages/dexpress.png",
+      link: "https://app.dexpress.ai/app",
     },
     {
-      name: "Institute",
-      imgSrc: "/assets/hoverImages/institute.png",
-      link: "https://vidyalaya-inst.vercel.app/",
+      name: "GTA VI",
+      imgSrc: "/assets/hoverImages/gta.png",
+      link: "https://gta-vi-eight-swart.vercel.app/",
+    },
+    {
+      name: "Nearwala",
+      imgSrc: "/assets/hoverImages/nearwala.png",
+      link: "https://nearwala.vercel.app/",
     },
   ];
 
-  const handleItemDoubleClick = (link: string) => {
+  const handleItemDoubleClick = (link?: string) => {
+    if (!link) {
+      console.warn("⚠️ No link provided — skipping open.");
+      return;
+    }
     gsap.to(".hovered-image", {
       opacity: 0,
       duration: 0.6,
